@@ -1,0 +1,36 @@
+@CHARSET "ISO-8859-1";
+
+.table_style{
+	
+	width:80%;
+	height:auto;
+	margin-top:2%;
+	
+
+	
+}
+.table_style th{
+	
+	height:50px;
+	background:#3B5998;
+	color:white;
+	font-size:120%;
+	font-family:Arial;
+
+
+}
+.table_style td{
+
+	height:45px;
+	font-size:120%;
+	font-family:Arial;
+	
+	
+}
+
+.table_style tr{
+	
+	background:#DFE3EE;	
+	text-align:center;
+	
+}

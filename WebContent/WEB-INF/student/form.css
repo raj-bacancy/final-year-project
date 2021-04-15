@@ -1,0 +1,52 @@
+@CHARSET "ISO-8859-1";
+.input_type{
+
+ 
+
+ font-family:Arial;
+ font-size:20px;
+ 
+ border-radius:15px;
+ border:1px solid black;
+ outline:none; 
+}
+.input_type_date{
+
+ 
+ width:190px;
+ height:40px;
+ font-family:Arial;
+ font-size:20px;
+
+ border-radius:15px;
+ border:1px solid black;
+ outline:none;
+}
+
+.label{
+
+ font-size:25px;
+ font-family:Arial;  
+}
+
+.button{
+	
+	font-size:25px;
+	font-family:Arial;
+	color:black;
+	height:40px;
+	width:200px;
+    margin-top:10px;
+    	
+}
+.align{
+	margin:auto;
+	border-top:0px solid black;
+	
+}
+.form-style{
+   width:auto";
+   height:auto;
+   border:0px solid black;
+   margin-top:5%;
+}
