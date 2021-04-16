@@ -38,7 +38,7 @@
     <div class="col-sm-12 col-12 text-center" style="margin:90px 0px " >
         <div class="row">
             <div class="col-sm-6 col-12 p-1 mb-5">
-                <a href="seepreviouscomplain.html"><div class="card box mx-auto" style="border:2px solid orange;width: 70%;border-radius:7%">
+                <a href="seepreviouscomplain.html"><div class="card box mx-auto" style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;width: 70%;border-radius:7%">
                   <center><i class='fa fa-exclamation-circle mt-2' style='font-size:100px;color:#FC3900'></i></center>
                   <hr>
                   <div class="row" style="height:auto;width:100%;border:0px solid black">
@@ -49,7 +49,7 @@
             </div></a>
             </div>
             <div class="col-sm-6 col-12 p-1">
-                 <a href="viewcomplain.html"><div class="card box mx-auto" style="border:2px solid orange;width:70%;border-radius:7%">
+                 <a href="viewcomplain.html"><div class="card box mx-auto" style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;width:70%;border-radius:7%">
                     <center><i class='fas fa-question-circle mt-2' style='font-size:100px;color:#FC3900'></i></center>
                   <hr>
                   <div class="row" style="height:auto;width:100%;border:0px solid black">

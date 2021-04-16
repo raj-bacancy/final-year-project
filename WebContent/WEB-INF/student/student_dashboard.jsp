@@ -50,7 +50,7 @@
 <%-- <jsp:include page="header.jsp"></jsp:include>
 <jsp:include page="student_table.jsp"></jsp:include> --%>
 <jsp:include page="new_menu_header.jsp"></jsp:include>
-
+<form action="Pay.html" method="post"><button>PaY Now</button></form>
 <div style="border:2px solid orange;border-radius:5%;margin-bottom:40%" class="bg-light mx-auto">
 	   			
 		   			

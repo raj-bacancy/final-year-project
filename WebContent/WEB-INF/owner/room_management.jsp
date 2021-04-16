@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Room Management</title>
-<link href="../general/style.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
 <link href="style_4option.css" rel="stylesheet">
 
 </head>

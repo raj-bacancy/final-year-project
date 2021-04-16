@@ -9,7 +9,7 @@
 <title>Requsts</title>
 
 <!-- <link href="../general/style.css" rel="stylesheet"> -->
-<link href="style.css" rel="stylesheet">
+<!-- <link href="style.css" rel="stylesheet"> -->
 
 <style>
 @media only screen and (max-width: 2000px) {
@@ -34,6 +34,12 @@
 	}
 }
 
+.box:hover{
+        transform: scale(1.1);
+        z-index: 1;
+        color: red;
+    }
+
 </style>
 </head>
 <body>
@@ -44,7 +50,7 @@
 
 <div class="row mt-5">
 		<div class="col-lg-6 col-md-6 col-12" >
-			 <a href="feereceiptrequests.html?start=0"><div class="card mt-5 box" style="border:2px solid orange;border-radius:7%;">
+			 <a href="feereceiptrequests.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box">
 				  <center><i class='fas fa-exclamation-triangle mt-2' style='font-size:100px;color:#FC3900'></i></center>
 				  <hr>
 				  <div class="row" style="height:auto;width:100%;border:0px solid black">
@@ -56,7 +62,7 @@
 				  	</div>
 				  </div>
 			</div></a>
-			<a href="gueststayowner.html?start=0"><div class="card mt-5 box" style="border:2px solid orange;border-radius:7%;">
+			<a href="gueststayowner.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box">
 					<center><i class='fas fa-bed mt-2' style='font-size:100px;color:#FC3900'></i></center>
 				  <hr>
 				  <div class="row" style="height:auto;width:100%;border:0px solid black">
@@ -70,7 +76,7 @@
 			</div></a>
 		</div>
 		<div class="col-lg-6 col-md-6 col-12" style="border:0px solid black">
-			<a href="leaverequestowner.html?start=0"> <div class="card mt-5 box" style="border:2px solid orange;border-radius:7%;">
+			<a href="leaverequestowner.html?start=0"> <div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box" >
 				  <center><i class='fa fa-building mt-2' style='font-size:100px;color:#FC3900'></i></center>
 				  <hr>
 				  <div class="row" style="height:auto;width:100%;border:0px solid black">
@@ -82,7 +88,7 @@
 				  	</div>
 				  </div>
 			</div></a>
-			<a href="foodcouponowner.html?start=0"><div class="card mt-5 box last_box" style="border:2px solid orange;border-radius:7%;">
+			<a href="foodcouponowner.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box last_box" >
 				  <center><i class='fas fa-concierge-bell mt-2' style='font-size:100px;color:#FC3900'></i></center>
 				  <hr>
 				  <div class="row" style="height:auto;width:100%;border:0px solid black">
