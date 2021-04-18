@@ -1,13 +1,27 @@
 package com.controller;
 
+import java.util.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringJoiner;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,14 +55,110 @@ public class filepath extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
-
+	private void generatetoken(String CardNumber,String mon,String year,String CVC,String amount) throws Exception{
+		String SecretKey="sk_test_51IKcX5JvMhB28Qnk9fMHc1ws88pz34plPnwmGccDPSu9hvo7BHzCeTPaPDUdBWWQY9nwdSJiIh42JzeZLGcnkyeH00RLKjqlup";
+		String url1 = "https://api.stripe.com/v1/tokens";
+		URL url = new URL(url1);
+		URLConnection con = url.openConnection();
+		HttpURLConnection http = (HttpURLConnection)con;
+		http.setRequestMethod("POST"); // PUT is another valid option
+		http.setDoOutput(true);
+		http.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+		http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		http.setRequestProperty("Authorization","Bearer "+SecretKey);
+		Map<String,String> arguments = new HashMap<>();
+		arguments.put("card[number]", CardNumber);
+		arguments.put("card[exp_month]", mon);
+		arguments.put("card[exp_year]", year);
+		arguments.put("card[cvc]", CVC);
+		StringJoiner sj = new StringJoiner("&");
+		for(Map.Entry<String,String> entry : arguments.entrySet())
+		    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
+		         + URLEncoder.encode(entry.getValue(), "UTF-8"));
+		byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+		int length = out.length;
+		
+		http.setFixedLengthStreamingMode(length);
+		http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+		http.connect();
+		try(OutputStream os = http.getOutputStream()) {
+		    os.write(out);
+		}catch(Exception e){
+			System.out.println("ERROR!!!"+e.getMessage());
+		}
+		BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                		http.getInputStream()));
+    String inputLine;
+    String Token = null;
+    int i=1;
+    while ((inputLine = in.readLine()) != null){ 
+      System.out.println(inputLine);
+      if(i==2){
+    	 Token=inputLine.substring(9,(inputLine.length()-2));
+    	 break;
+      }
+      i++;
+    }
+    in.close();
+    System.out.println("Token  = = = "+Token);
+    if(Token!=null){
+    	try {
+			pay(Token,amount);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+	}
+	
+	private void pay(String token,String amount) throws Exception {
+		String SecretKey="sk_test_51IKcX5JvMhB28Qnk9fMHc1ws88pz34plPnwmGccDPSu9hvo7BHzCeTPaPDUdBWWQY9nwdSJiIh42JzeZLGcnkyeH00RLKjqlup";
+		String url1 = "https://api.stripe.com/v1/charges";
+		
+		URL url = new URL(url1);
+		URLConnection con = url.openConnection();
+		HttpURLConnection http = (HttpURLConnection)con;
+		http.setRequestMethod("POST"); // PUT is another valid option
+		http.setDoOutput(true);
+		http.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+		http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		http.setRequestProperty("Authorization","Bearer "+SecretKey);
+		Map<String,String> arguments = new HashMap<>();
+		arguments.put("amount", amount);
+		arguments.put("currency", "inr");
+		arguments.put("description", "Payment From HDMS");
+		arguments.put("source", token);
+		StringJoiner sj = new StringJoiner("&");
+		for(Map.Entry<String,String> entry : arguments.entrySet())
+		    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
+		         + URLEncoder.encode(entry.getValue(), "UTF-8"));
+		byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+		int length = out.length;
+		
+		http.setFixedLengthStreamingMode(length);
+		http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+		http.connect();
+		try(OutputStream os = http.getOutputStream()) {
+		    os.write(out);
+		}catch(Exception e){
+			System.out.println("ERROR!!!"+e.getMessage());
+		}
+		BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                		http.getInputStream()));
+    String inputLine;
+    while ((inputLine = in.readLine()) != null){ 
+      System.out.println(inputLine);
+      
+    }
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 			String link1="";
 			HttpSession session=request.getSession();
 			String filetype=(String)session.getAttribute("filetype");
@@ -271,6 +381,35 @@ public class filepath extends HttpServlet {
 					e.printStackTrace();
 				}	
 				response.sendRedirect("redirection.jsp");	
+			}else if(filetype.equals("feepayment")){
+				String CardNumber=request.getParameter("cardnumber");
+		        String mon=request.getParameter("expmonth");
+		        String year=request.getParameter("expyear");
+		        String CVC=request.getParameter("cvc");
+		        String amount=request.getParameter("amount");
+		        session.setAttribute("redirect", "feepayment");
+		        System.out.println("cardnumber = "+CardNumber);
+		        System.out.println("mon = "+mon);
+		        System.out.println("year = "+year);
+		        System.out.println("amount = "+amount);
+		        System.out.println("CVC = "+CVC);
+		        try {
+		        	String currentyear =String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		        	String hostelid=(String)session.getAttribute("hostel_id");
+					generatetoken(CardNumber,mon,year,CVC,amount);
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection c=DriverManager.getConnection("jdbc:mysql://localhost/enr","root","root");
+					Statement s=c.createStatement();
+					s.executeUpdate("insert into fee_receipt (currentyear,hostelid,status) values ('"+currentyear+"','"+hostelid+"','approved')");
+					s.close();
+					c.close();
+					session.setAttribute("redirect", "feepaymentsuccess");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					session.setAttribute("redirect", "feepaymentfailed");
+				}
+		        response.sendRedirect("redirection.jsp");
 			}
 	}
 }

@@ -344,6 +344,8 @@ public class studentcontroller {
 		
 	}
 	
+	
+	
 	@RequestMapping(value="upload.html",method=RequestMethod.GET)
 	public ModelAndView upload(@ModelAttribute fee_receipt fee) throws Exception
 	{
@@ -572,5 +574,10 @@ public class studentcontroller {
       
     }
 	}
+    
+    @RequestMapping(value = { "loadpayment.html" }, method = { RequestMethod.GET })
+    public ModelAndView loadpayment() {
+        return new ModelAndView("student/payment");
+    }
 	
 }

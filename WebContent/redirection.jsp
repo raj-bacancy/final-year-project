@@ -35,6 +35,14 @@ out.println("<script>");
 	{
 		out.println("alert('Document added in locker successfully');");
 		out.println("location='studenthome.html';");
+	}else if(s.equals("feepaymentsuccess"))
+	{
+		out.println("alert('Payment Successfull');");
+		out.println("location='feereceipt.html';");
+	}else if(s.equals("feepaymentfailed"))
+	{
+		out.println("alert('Payment Failed');");
+		out.println("location='feereceipt.html';");
 	}
 	out.println("</script>");
 %>
