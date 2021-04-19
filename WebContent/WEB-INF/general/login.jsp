@@ -85,7 +85,7 @@
 		<div class="col-sm-6 col-12" style="border:2px solid orange ; border-radius: 5%">
 			<div class="p-3	">
 			<h2 class="pt-5"><b>About this platform</b></h2><br>
-			<p>In current scenario owner has to keep the record of all hosteller on paper which is very difficult to manage, search, update etc. If owner want some data of perticular hosteller then it would be very difficult for him/her to find out data and it is also time consuming.</p>
+			<p>In current scenario owner has to keep the record of all hosteller on paper which is very difficult to manage, search, update etc. If owner want some data of particular hosteller then it would be very difficult for him/her to find out data and it is also time consuming.</p>
 			<p>So this is the platform where owner can store each and every information of hosteller as well as about the hostel with few clicks. This system is designed in favour of the database management which helps them to save rent related data, food management, vacancies of rooms, guest night stay data etc.</p>
 			</div>
 		</div>

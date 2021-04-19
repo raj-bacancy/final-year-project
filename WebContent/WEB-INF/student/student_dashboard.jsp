@@ -119,13 +119,13 @@
                           <div class="col-sm-12 col-12">
                             <div class="row">
                                 <div class="col-sm-4 col-12">
-                                    <b>Total no of room = 20</b>
+                                    <b>Total no of room = ${noofroom}</b>
                                 </div>
                                 <div class="col-sm-4 col-12">
-                                    <b>No of student's room = 10</b>
+                                    <b>No of student's room = ${noofstudentroom}</b>
                                 </div>
                                 <div class="col-sm-4 col-12">
-                                    <b>No of guest's rooms = 10</b>
+                                    <b>No of guest's rooms = ${noofguestroom}</b>
                                 </div>
                               </div>
                           </div><br/><br/>
@@ -139,13 +139,13 @@
                           <div class="col-sm-12 col-12">
                             <div class="row">
                                 <div class="col-sm-4 col-12">
-                                    <b>Capacity for students = 20</b>
+                                    <b>Capacity for students = ${totalcapacity}</b>
                                 </div>
                                 <div class="col-sm-4 col-12">
-                                    <b>No of students in hostel  = 10</b>
+                                    <b>No of students in hostel  = ${totalmamber}</b>
                                 </div>
                                 <div class="col-sm-4 col-12">
-                                    <b>Vacancy in hostel = 10</b>
+                                    <b>Vacancy in hostel = ${vacancy}</b>
                                 </div>
                               </div>
                           </div><br/>

@@ -109,7 +109,8 @@ int roomno=(Integer)session.getAttribute("roomno");
 					    </div>
 					    <div class="col-sm-6 col-6">
 					      <label><b>DOB(Date of Birth):</b></label>
-					     	<f:input type="date"  path="dateofbirth" class="form-control"  placeholder="Date Of Birth" required="required"/>
+					      <!-- <input type="date"  path="dateofbirth" class="form-control" min="01-01-1970" max="2018-12-31"  placeholder="Date Of Birth" required="required"/> -->
+					     	 <f:input type="date"  path="dateofbirth" class="form-control" min="1970-01-01" max="2021-01-01"  placeholder="Date Of Birth" required="required"/>
 					    </div>
 					  </div><br>
 					  

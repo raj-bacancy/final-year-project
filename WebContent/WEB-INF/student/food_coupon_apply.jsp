@@ -39,7 +39,7 @@
 		   		
 		   		<div class="row">
 		   			<div class="col-12 col-sm-3 "><h3 class="pl-4">Date </h3></div>
-		   			<div class="col-10 col-sm-5 mb-5 set_input_box"><f:input type="date"  class="form-control" value="<%=date%>" readonly="readonly"  path="date"/></div>
+		   			<div class="col-10 col-sm-5 mb-5 set_input_box"><f:input type="text" readonly="true" class="form-control" value="<%=date%>" path="date"/></div>
 		   		</div>
 		   		
 		   		<div class="row">

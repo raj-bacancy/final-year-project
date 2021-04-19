@@ -159,21 +159,22 @@ public class messcontroller
          }    
         });    
         //compose message    
-        try {    
-        	
-        	for(int i=0;i<l.size();i++)
-        	{
-		         MimeMessage message = new MimeMessage(session);    
-		         message.addRecipient(Message.RecipientType.TO,new InternetAddress((String) l.get(i)));    
-		         message.setSubject(subject);    
-		         message.setText(body);    
-		         //send message  
-		         Transport.send(message);    
-		         System.out.println("message sent successfully to "+l.get(i)); 
-        	}
-        } catch (MessagingException e) {throw new RuntimeException(e);}
-        
-        return new ModelAndView("mess/homepage");
+        for(int i=0;i<l.size();i++)
+    	{
+	        try {    
+	        	
+	        	
+			         MimeMessage message = new MimeMessage(session);    
+			         message.addRecipient(Message.RecipientType.TO,new InternetAddress((String) l.get(i)));    
+			         message.setSubject(subject);    
+			         message.setText(body);    
+			         //send message  
+			         Transport.send(message);    
+			         System.out.println("message sent successfully to "+l.get(i)); 
+	        	
+	        	} catch (MessagingException e) {System.out.println("ERROR!!!");}
+    	}
+        return new ModelAndView("mess/message");
     }
     
     @RequestMapping(value = { "todayfoodcoupons.html" }, method = { RequestMethod.GET })

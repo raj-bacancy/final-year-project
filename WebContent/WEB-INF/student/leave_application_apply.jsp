@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.*" import="java.text.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,11 +8,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="style.css" rel="stylesheet">
+<script>
+function updatedate()
+{
+	var firstdate = document.getElementById("first_date").value;
+    document.getElementById("second_date").min = firstdate;
+}
+function updatetime()
+{
+	var firstdate = document.getElementById("first_date").value;
+	var seconddate = document.getElementById("second_date").value;
+	if(firstdate==seconddate)
+	{
+		var firsttime = document.getElementById("first_time").value;
+    	document.getElementById("second_time").min = firsttime;
+	}
+}
+
+</script>
 </head>
 <body>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%
 	String hostel_id=(String)session.getAttribute("hostel_id");
+SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+String d=f.format(new Date());
 
 %>
 
@@ -33,7 +53,7 @@
 		   		
 		   		<div class="row">
 		   			<div class="col-12 col-sm-3"><h3 class="pl-4">Leave From:</h3></div>
-		   			<div class="col-10 col-sm-3 set_input_box"><f:input type="date" path="datefrom" id="first_date" class="form-control" placeholder=" Leave From" required="required" /></td><td></div>
+		   			<div class="col-10 col-sm-3 set_input_box"><f:input type="date" min="<%=d%>" path="datefrom" id="first_date" class="form-control" placeholder=" Leave From" required="required" /></td><td></div>
 		   			<div class="col-12 col-sm-3 leave_to"><h3>Leave To:</h3></div>
 		   			<div class="col-10 col-sm-3 set_input_box"><f:input path="dateto" type="date" id="second_date" onchange="updatedate()" class="form-control" name="date_to" placeholder=" Leave To" required="required" /></div>
 		   		

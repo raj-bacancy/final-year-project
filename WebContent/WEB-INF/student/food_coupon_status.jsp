@@ -66,7 +66,7 @@
 									<th><b>Date</b></th>
 									<th><b>FoodTime</b></th>
 									<th><b>Status</b></th>
-									<th><b>Payment</b></th>
+									<!-- <th><b>Payment</b></th> -->
                                     </tr>
                                     <tbody>
                                               
@@ -78,7 +78,7 @@
 			<td><b>${i.date }</b></td>
 			<td><b>${i.foodtime}</b></td>
 			<td ><b>${i.status}</b></td>
-			<td><b><a href="checkpay.html?status=${i.status }&cost=${i.cost}&foodtime=${i.foodtime}"><button  class="btn" >PaY Now</button></a></b></td>
+			<%-- <td><b><a href="checkpay.html?status=${i.status }&cost=${i.cost}&foodtime=${i.foodtime}"><button  class="btn" >PaY Now</button></a></b></td> --%>
 			<input type="hidden" id="h1" value="${i.cost }">
 		
 			</tr>

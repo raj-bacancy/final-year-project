@@ -32,7 +32,7 @@
 <jsp:include page="new_menu_header.jsp"></jsp:include>
 <div id="profile" class="mx-auto mt-3 box_content mb-5 bg-white">
 		<%-- <center><div class="mt-3"><img src="https://rgpatel7714.s3.amazonaws.com/test_1/PHOTO.jpg" style="heigth:30%;width:20%;opacity:200%"></div></center> --%>
-	  <center><table class="information_table" style="margin-right:15%">
+	  <center><table class="table table-stripped table-hover table-responsive-sm" style="margin-right:15%">
 	   <c:forEach items="${list }" var="i">
 	  
 	   <center><div class="mt-3"><img src="${i.image}" style="heigth:30%;width:20%;opacity:200%"></div></center>

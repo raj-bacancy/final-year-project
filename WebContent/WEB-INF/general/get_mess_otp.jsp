@@ -19,7 +19,7 @@
 					    <div class="col">
 					      <label><h2><b>Enter Your OTP Here<b></b></h2></label>
 					      	<hr ><br>
-						    <input type="text" value="<%=otp%>" name="otp" required  placeholder="Enter Your OTP">
+						    <input type="text" name="otp" required  placeholder="Enter Your OTP">
 						    <br>
 					      <h6 class="mt-2">We have sent OTP on your registered email address</h6>
 					      <button type="submit" class="btn mt-5 text-white mb-3" style="background-color:#FF5C20">Set New Password</button>

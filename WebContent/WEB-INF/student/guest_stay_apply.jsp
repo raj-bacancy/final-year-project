@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.util.*" import="java.text.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,11 +8,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="style.css" rel="stylesheet">
+<script>
+function updatedate()
+{
+	var firstdate = document.getElementById("first_date").value;
+    document.getElementById("second_date").min = firstdate;
+}
+function updatetime()
+{
+	var firstdate = document.getElementById("first_date").value;
+	var seconddate = document.getElementById("second_date").value;
+	if(firstdate==seconddate)
+	{
+		var firsttime = document.getElementById("first_time").value;
+    	document.getElementById("second_time").min = firsttime;
+	}
+}
+
+</script>
 </head>
 <body>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%
 String hostelid=(String)session.getAttribute("hostel_id");
+SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+String d=f.format(new Date());
 %>
 
 
@@ -32,9 +52,9 @@ String hostelid=(String)session.getAttribute("hostel_id");
 		   		
 		   		<div class="row">
 		   			<div class="col-12 col-sm-3"><h3 class="pl-4">Date From</h3></div>
-		   			<div class="col-10 col-sm-3 set_input_box"><f:input path="datefrom" type="date" class="form-control" id="first_date" style="border-radius:7px " name="date_from" placeholder=" Leave From" required="required" /></div>
+		   			<div class="col-10 col-sm-3 set_input_box"><f:input path="datefrom" min="<%=d %>" type="date" class="form-control" id="first_date" style="border-radius:7px " name="date_from" placeholder=" Leave From" required="required" /></div>
 		   			<div class="col-12 col-sm-3 leave_to"><h3>Date To</h3></div>
-		   			<div class="col-10 col-sm-3 set_input_box"><f:input path="dateto" type="date" class="form-control mr-5" id="second_date" style="border-radius:7px " name="date_to" placeholder=" Leave To" required="required" /></div>
+		   			<div class="col-10 col-sm-3 set_input_box"><f:input path="dateto" onchange="updatedate()" type="date" class="form-control mr-5" id="second_date" style="border-radius:7px " name="date_to" placeholder=" Leave To" required="required" /></div>
 		   		
 		   		</div>	
 		   		<br>

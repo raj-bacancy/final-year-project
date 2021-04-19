@@ -22,7 +22,7 @@
 
 <div style="border:2px solid orange;border-radius:5%" class="bg-white mx-auto p-5 bottom_space">
 	   			
-		   			<h2 class="text-center"><b>Fee Receipt Status</b></h2>
+		   			<h2 class="text-center"><b>Available Rooms</b></h2>
 	   			<hr>
 		   				<div class="row">
 						    <div class="col-sm-12 col-12">

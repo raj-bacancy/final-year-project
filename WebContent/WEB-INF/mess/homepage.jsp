@@ -18,7 +18,7 @@
 
 <div class="mx-auto mt-3 leave_div bg-white">
 	<div class="ml-5 mb-5"><c:forEach items="${list }" var="i"> 
-	   			<h1 class="pt-4 mx-auto"><b>Welcome to Mess Portal ${i.username }</b></h1>
+	   			<center><h1 class="pt-4 mx-auto"><b>Welcome to Mess Portal ${i.username }</b></h1></center>
 	   			<hr>
 		   		
 <div class="row">

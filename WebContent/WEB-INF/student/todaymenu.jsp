@@ -60,40 +60,40 @@
 <body>
 <div style="height:auto;width:auto">
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ include file="header.jsp" %>
-<jsp:include page="student_table.jsp"></jsp:include> 
+<%-- <%@ include file="header.jsp" %>
+<jsp:include page="student_table.jsp"></jsp:include>  --%>
+<jsp:include page="new_menu_header.jsp"></jsp:include>
 <div class="container">
-<div style="height:auto;width:70%;margin-top:5%;margin-left:20%;border:2px solid orange;border-radius:5%" class="bg-info">
-	<div class="row pl-5" style="margin-top:10%;">
+<div style="height:auto;width:70%;margin-top:5%;margin-left:20%;border:2px solid orange;border-radius:5%" class="bottom_space bg-white">
+	<div class="row p-4" style="">
 		
 
-		<div class="col-sm-6 col-6 pl-5" style="border:0px solid orange;border-radius:5%";height:auto">
+		<div class="col-sm-6 col-12 pl-2" style="border:0px solid orange;border-radius:5%;height:auto">
 			 <h1>Lunch Menu</h1>
 			 
 		
 			 <c:forEach items="${sessionScope.l1 }" var="i">
-			   <textarea cols="30" rows="5">${i.lunchmenu }</textarea>
+			   <textarea cols="30" rows="5" class="form-control" readonly="true">${i.lunchmenu }</textarea>
 			   
 			   <br><hr>
-			    <h1>Lunch Price</h1><input type="text" value="${i.lunchprice }">
+			    <h1>Lunch Price</h1><input type="text" class="form-control" value="${i.lunchprice }" readonly="true">
 			   </c:forEach>
 			 
 		</div>
-		<div class="col-sm-6 col-6 pl-5" style="border:0px solid orange;border-radius:5%";height:auto">
+		<div class="col-sm-6 col-12 pl-2" style="border:0px solid orange;border-radius:5%;height:auto">
 			 <h1>Dinner Menu</h1>
 			
 			 <c:forEach items="${sessionScope.l2 }" var="i">
-			   <textarea cols="30" rows="5">${i.dinnermenu }</textarea>
+			   <textarea cols="30" rows="5" class="form-control" readonly="true">${i.dinnermenu }</textarea>
 			   
 			    <br><hr>
-			    <h1>Dinner Price</h1><input type="text" value="${i.dinnerprice }">
+			    <h1>Dinner Price</h1><input type="text" class="form-control" value="${i.dinnerprice }" readonly="true">
 			   </c:forEach>
 			
 			
     
 	   </div>	
-	</div><br><br>
-	<center><a href="applycoupon.html"><button type="button" class="btn btn-success">Apply for coupon</button></a></center><br>
+	</div><br><br>	<center><a href="applycoupon.html"><button type="button" class="btn btn-success">Apply for coupon</button></a></center><br>
 </div>
 </div>
 </body>
