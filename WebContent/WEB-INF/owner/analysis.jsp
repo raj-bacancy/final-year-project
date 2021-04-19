@@ -19,11 +19,10 @@
 						  <div class="row pl-5">
 						    <div class="col">
 						      <select name="option" style="height:150%; width: 60%">
-						      	<option selected disabled hidden>---Choose an option---</option>
+						      	<option value="food">Food Analysis</option>
 						      	<option value="fee-paid">Fees-Paid</option>
 						      	<option value="fee-unpaid">Fees-Unpaid</option>
 								<!-- <option value="fee-unpaid">Fees-Unpaid</option> -->
-								<option value="food">Food Analysis</option>
 								<option value="leave">Leave Analysis</option>
 								<option value="gueststay">Guest Night Stay Analysis</option>
 						      </select>

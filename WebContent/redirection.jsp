@@ -43,6 +43,14 @@ out.println("<script>");
 	{
 		out.println("alert('Payment Failed');");
 		out.println("location='feereceipt.html';");
+	}else if(s.equals("foodpaymentsuccess"))
+	{
+		out.println("alert('Payment Successfull');");
+		out.println("location='foodcoupon.html';");
+	}else if(s.equals("foodpaymentfailed"))
+	{
+		out.println("alert('Payment Failed');");
+		out.println("location='foodcoupon.html';");
 	}
 	out.println("</script>");
 %>

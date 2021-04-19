@@ -60,12 +60,12 @@
 					  <br/>
 					  <div class="col-sm-12 col-12 p-2">
 					      <label><b>UserName/Hostel Id </b></label>
-					      <f:input type="text" class="form-control" placeholder="Enter UserName" path="username"  cssStyle="width:70%"/>
+					      <f:input type="text" class="form-control" placeholder="Enter UserName" path="username" required="true"  cssStyle="width:70%"/>
 					  </div><br/>
 					  
 					<div class="col-sm-12 col-12 p-2">
 					      <label><b>Password </b></label>
-					      <f:input type="Password" class="form-control" placeholder="Enter Password" path="password"  cssStyle="width:70%"/>
+					      <f:input type="Password" class="form-control" placeholder="Enter Password" path="password" required="true" cssStyle="width:70%"/>
 					    
 					  </div><br/>
 					   

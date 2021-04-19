@@ -40,7 +40,7 @@
 						<hr/>
 						<div class="col-sm-12 col-12">
 						<center> <h5><b><button class="btn btn-danger">Hostel Information</button></b></h5></center>
-						</div>
+						</div><br>
 
 						<!-- section4 -->
 						<div class="col-sm-12 col-12 text-center">

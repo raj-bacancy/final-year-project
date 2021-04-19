@@ -23,14 +23,15 @@ int startpoint=(Integer)session.getAttribute("startpoint");
 
 <div style="border:2px solid orange;border-radius:5%" class="bg-white mx-auto p-5 bottom_space">
 	   			
-		   			<h2 class="text-center"><b>Leave Applications</b></h2>
+		   			<h2 class="text-center"><b>Guest Stay Requests</b></h2>
 	   			<hr>
 		   				<div class="row">
 						    <div class="col-sm-12 col-12">
-                                <table class="table table-stripped table-hover table-bordered table-responsive-sm">
+                                <table id="table_id" class="table table-stripped table-hover table-bordered table-responsive-sm">
                                     <thead class="thead-dark">
                                     <tr>
                                     <th><b>No.</b></th>
+                                    <th><b>Hostel Id.</b></th>
 									<th><b>Date From</b></th>
 									<th><b>Date To</b></th>
 									<th><b>Check In Time</b></th>
@@ -45,6 +46,7 @@ int startpoint=(Integer)session.getAttribute("startpoint");
        <c:forEach items="${list1}" var="i">	
 			<tr>	
 		   	<td><b><%=++i%></b></td>
+		   	<td><b>${i.hostelid }</b></td>
 			<td><b>${i.datefrom }</b></td>
 			<td><b>${i.dateto }</b></td>
 			<td><b>${i.checkin}</b></td>
@@ -59,7 +61,6 @@ int startpoint=(Integer)session.getAttribute("startpoint");
            
                                     </tbody>
 							</table>
-							<a href="gueststayowner.html?start=<%=startpoint%>" class="ml-5"><b>Next</b></a>
 						</div>
                 </div>
             </div>

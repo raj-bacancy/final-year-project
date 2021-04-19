@@ -33,11 +33,17 @@
 String hostel_id=(String)session.getAttribute("hostel_id");
 int roomno=(Integer)session.getAttribute("roomno");
 %>
+
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<div class="container mt-5 mb-5 bg-light" style="border:2px solid orange ; border-radius: 5%">
+<div class="container mt-5 mb-5 bg-white" style="border:1px solid orange ; border-radius: 5%">
+<div class="container text-center">
+		<h2 class="pt-3 pb-2"><b><a style="color:  #FF5C20">Hostel</a> Management System</b></h2>
+		<hr class="w-100 mx-auto">
+	</div>
+	
 	   			<div style="width:50%;margin-left:25%" class="mt-5">
 	   			<h2>Sign Up For Student</h2>
-	   			<hr class="mb-5" style="border:1px solid orange">
+	   			<hr class="mb-5" style="border:1px solid black">
 	   			<f:form action="studentregistration.html" method="post" modelAttribute="student_reg" >
 					  <div class="row">
 					    <div class="col-sm-6 col-6">
@@ -53,7 +59,7 @@ int roomno=(Integer)session.getAttribute("roomno");
 					  <div class="row mt-2">
 					    <div class="col-12 col-sm-12">
 					      <label><b>E mail:</b></label>
-					      <f:input path="email" class="form-control" placeholder="Enter Your Mobile No" required="required"/>
+					      <f:input path="email" type="email" class="form-control" placeholder="Enter Your Email" required="required"/>
 					    </div>
 					  </div><br>
 					  
@@ -73,7 +79,7 @@ int roomno=(Integer)session.getAttribute("roomno");
 					 <div class="row mt-2">
 					    <div class="col-12 col-sm-12">
 					      <label><b>Phone Number</b></label>
-					      <f:input type="text" path="phoneno" class="form-control"  placeholder="Phone No" required="required"/>
+					      <f:input type="tel" pattern="[0-9]{10}" path="phoneno" class="form-control"  placeholder="Phone No" required="required"/>
 					    </div>
 					  </div>
 					  <br>
@@ -137,13 +143,13 @@ int roomno=(Integer)session.getAttribute("roomno");
 					    </div>
 					    <div class="col-sm-6 col-6">
 					      <label><b>Father Contact No.</b></label>
-					     	<f:input type="text"  path="fathercellno"  placeholder="Father Phone No" class="form-control" required="required"/>
+					     	<f:input type="tel" pattern="[0-9]{10}"  path="fathercellno"  placeholder="Father Phone No" class="form-control" required="required"/>
 					    </div>
 					  </div><br>
 					  <div class="row mt-2">
 					    <div class="col-12 col-sm-12">
 					      <label><b>Father Email Id: </b></label>
-					      <f:input  type="text" path="fatheremailid" class="form-control" placeholder="abc@xyz.com" required="required"/>
+					      <f:input type="email" path="fatheremailid" class="form-control" placeholder="abc@xyz.com" required="required"/>
 					    </div>
 					  </div>
 					  <br>
@@ -156,7 +162,7 @@ int roomno=(Integer)session.getAttribute("roomno");
 					    </div>
 					    <div class="col-sm-6 col-6">
 					      <label><b>Mother Contact No.</b></label>
-					     	<f:input type="text"  path="mothercellno" placeholder="Mother Phone No" class="form-control" required="required"/>
+					     	<f:input  type="tel" pattern="[0-9]{10}"  path="mothercellno" placeholder="Mother Phone No" class="form-control" required="required"/>
 					    </div>
 					  </div><br>
 					  

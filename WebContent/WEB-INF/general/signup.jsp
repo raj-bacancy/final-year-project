@@ -27,8 +27,11 @@
   </style>
 <body>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
-<%@include file="header.jsp" %>
-<!-- Log in portion -->
+
+<div class="container text-center">
+		<h2 class="pt-3 pb-2"><b><a style="color:  #FF5C20">Hostel</a> Management System</b></h2>
+		<hr class="w-100 mx-auto">
+	</div>
 
 	
 <center><div class="container" style="border:2px solid orange; border-radius: 5%; margin-top: 5%;margin-bottom: 5%;width:50%">

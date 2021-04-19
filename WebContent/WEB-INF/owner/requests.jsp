@@ -50,18 +50,18 @@
 
 <div class="row mt-5">
 		<div class="col-lg-6 col-md-6 col-12" >
-			 <a href="feereceiptrequests.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box">
+			 <%-- <a href="feereceiptrequests.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box">
 				  <center><i class='fas fa-exclamation-triangle mt-2' style='font-size:100px;color:#FC3900'></i></center>
 				  <hr>
-				  <div class="row" style="height:auto;width:100%;border:0px solid black">
+				   <div class="row" style="height:auto;width:100%;border:0px solid black">
 				  	<div class="col col-7"><h4 class="ml-3 mt-1"><b>Fee<br> Request</b></h4>
 				  	</div>
 				  	<div class="col col-2"><div style="height:90%;width:1%;border:2px solid black"></div>
 				  	</div>
 				  	<div class="col col-3"><h4 class=" mt-1"><b>${no_of_fee}</b></h4>
 				  	</div>
-				  </div>
-			</div></a>
+				  </div> 
+			</div></a> --%>
 			<a href="gueststayowner.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box">
 					<center><i class='fas fa-bed mt-2' style='font-size:100px;color:#FC3900'></i></center>
 				  <hr>
@@ -88,7 +88,7 @@
 				  	</div>
 				  </div>
 			</div></a>
-			<a href="foodcouponowner.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box last_box" >
+			<%-- <a href="foodcouponowner.html?start=0"><div style="box-shadow: 10px 10px 20px 10px rgba(1, 1, 1, .1);border:2px solid orange;border-radius:7%" class="card mt-5 box last_box" >
 				  <center><i class='fas fa-concierge-bell mt-2' style='font-size:100px;color:#FC3900'></i></center>
 				  <hr>
 				  <div class="row" style="height:auto;width:100%;border:0px solid black">
@@ -99,7 +99,7 @@
 				  	<div class="col col-3"><h4 class=" mt-1"><b>${no_of_foodcoupon}</b></h4>
 				  	</div>
 				  </div>
-			</div></a>
+			</div></a> --%>
 		</div>
 	</div>
 </div>

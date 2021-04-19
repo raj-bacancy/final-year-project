@@ -45,6 +45,12 @@
 	   <th><p>Hostel Id:</p></th><td></td>
 	   <td><p>${i.hostelid}</p></td>
 	   </tr>
+	   
+	   <tr>
+	   <th><p>Room No:</p></th><td></td>
+	   <td><p>${i.roomno}</p></td>
+	   </tr>
+	   
 	   <tr>
 	   <th><p>Email:</p></th><td></td>
 	   <td><p>${i.email }</p></td>

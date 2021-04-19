@@ -44,8 +44,8 @@ public class guest_stay_dao {
 		System.out.println("Featch All Data");
 		Session session=sessionfactory.openSession();
 		Query q=session.createQuery("from guest_stay_vo where status='"+status+"'");
-		q.setFirstResult(start);
-		q.setMaxResults(5);
+		//q.setFirstResult(start);
+		//q.setMaxResults(5);
 		List l=q.list();
 		session.close();
 		return l;	

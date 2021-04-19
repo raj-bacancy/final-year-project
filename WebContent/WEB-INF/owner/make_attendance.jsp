@@ -22,7 +22,7 @@
 							    <div class="col">
 							    <c:forEach items="${list}" var="l">	
 							  		<center><input type="checkbox" name="hostelid" value="${l.hostelid}">
-							  		<label class="pt-2"><b>${l.hostelid}</b></label><br></center>
+							  		<label class="pt-2"><b><a style="color:blue" href="viewprofile.html?hostelid=${l.hostelid}">${l.hostelid}</a></b></label><br></center>
 								</c:forEach>
 							    </div>
 							  </div>  		

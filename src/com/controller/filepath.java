@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.sql.*;
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,6 +19,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -34,6 +36,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+
 
 /**
  * Servlet implementation class filepath
@@ -159,255 +162,301 @@ public class filepath extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String link1="";
-			HttpSession session=request.getSession();
-			String filetype=(String)session.getAttribute("filetype");
-			System.out.println(filetype);
-			if(filetype.equals("feereceipt"))
+		String link1="";
+		HttpSession session=request.getSession();
+		String filetype=(String)session.getAttribute("filetype");
+		System.out.println(filetype);
+		if(filetype.equals("feereceipt"))
+		{
+			System.out.println("fee Receipt");
+			String hostelid=request.getParameter("hostelid");
+			String currentyear=request.getParameter("currentyear");
+			String status="pending";
+			
+			System.out.println("filepath");
+			Part filepart=request.getPart("file");
+			InputStream fileinputstream=filepart.getInputStream();
+			File filetosave=new File(filepart.getSubmittedFileName());
+			Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			
+			String link = "";
+			
+			 String key = "feereceipt/"+hostelid+"/"+ filepart.getSubmittedFileName();
+			 String accesskey = "AKIAZYZ57NNJ2MRI6NUX";
+			 String secretkey = "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";
+			 String bucketname = "rajpatel";
+			 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
+			
+			
+				System.out.println("1) ----file uploading---");
+				PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
+		        request1.setCannedAcl(CannedAccessControlList.PublicRead);
+				s3.putObject(request1);
+				System.out.println("----File uploaded----");
+				System.out.println("\n\n2) ----Get Object---");
+				link = s3.getUrl(bucketname, key).toString();
+				System.out.println("S3 Link: " + link);	
+				
+			session.setAttribute("redirect", "loadfeereceipt");
+			System.out.println("--------------------------------------"+hostelid);
+			try 
 			{
-				System.out.println("fee Receipt");
-				String hostelid=request.getParameter("hostelid");
-				String currentyear=request.getParameter("currentyear");
-				String status="pending";
-				
-				System.out.println("filepath");
-				Part filepart=request.getPart("file");
-				InputStream fileinputstream=filepart.getInputStream();
-				File filetosave=new File(filepart.getSubmittedFileName());
-				Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
-				
-				String link = "";
-				
-				 String key = "feereceipt/"+hostelid+"/"+ filepart.getSubmittedFileName();
-				 String accesskey = "AKIASSUNY6Y4XSRJVLKV";
-				 String secretkey = "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";
-				 String bucketname = "enrhostelmanagement";
-				 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
-				
-				
-					System.out.println("1) ----file uploading---");
-					PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
-			        request1.setCannedAcl(CannedAccessControlList.PublicRead);
-					s3.putObject(request1);
-					System.out.println("----File uploaded----");
-					System.out.println("\n\n2) ----Get Object---");
-					link = s3.getUrl(bucketname, key).toString();
-					System.out.println("S3 Link: " + link);	
-					
-				session.setAttribute("redirect", "loadfeereceipt");
-				System.out.println("--------------------------------------"+hostelid);
-				try 
-				{
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection c=DriverManager.getConnection("jdbc:mysql://enr-hostel-database.cxi8oq6r3cya.us-east-1.rds.amazonaws.com/enr","admin12345","admin12345");
-					Statement s=c.createStatement();
-					s.executeUpdate("insert into fee_receipt (currentyear,feereceipt,hostelid,status) values ('"+currentyear+"','"+link+"','"+hostelid+"','"+status+"')");
-					s.close();
-					c.close();
-				} 
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}	
-				response.sendRedirect("redirection.jsp");
-			}
-			else if(filetype.equals("photo"))
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection c=DriverManager.getConnection("jdbc:mysql://localhost/enr","root","root");
+				Statement s=c.createStatement();
+				s.executeUpdate("insert into fee_receipt (currentyear,feereceipt,hostelid,status) values ('"+currentyear+"','"+link+"','"+hostelid+"','"+status+"')");
+				s.close();
+				c.close();
+			} 
+			catch (Exception e)
 			{
-				session.setAttribute("redirect", "uniqueid");
-				String hostelid=(String)session.getAttribute("hostel_id");
-				System.out.println("--------------------------------------"+hostelid);
-				System.out.println("filepath");
-				Part filepart=request.getPart("file");
-				InputStream fileinputstream=filepart.getInputStream();
-				File filetosave=new File(filepart.getSubmittedFileName());
-				Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
-				
-				String link = "";
-				
-				String key = "photo/"+hostelid+"/"+ filepart.getSubmittedFileName();
-				 String accesskey = "AKIASSUNY6Y4XSRJVLKV";
-				 String secretkey = "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";
-				 String bucketname = "enrhostelmanagement";
-				 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
-				
-				
-					System.out.println("1) ----file uploading---");
-					PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
-			        request1.setCannedAcl(CannedAccessControlList.PublicRead);
-					s3.putObject(request1);
-					System.out.println("----File uploaded----");
-					System.out.println("\n\n2) ----Get Object---");
-					link = s3.getUrl(bucketname, key).toString();
-					System.out.println("S3 Link: " + link);
-				try 
-				{
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection c=DriverManager.getConnection("jdbc:mysql://enr-hostel-database.cxi8oq6r3cya.us-east-1.rds.amazonaws.com/enr","admin12345","admin12345");
-					Statement s=c.createStatement();
-					s.executeUpdate("update student_registration set image='"+link+"' where hostelid='"+hostelid+"'");
-					s.close();
-					c.close();
-				} 
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}	
-				response.sendRedirect("redirection.jsp");	
-			}
-			else if(filetype.equals("uniqueid"))
+				e.printStackTrace();
+			}	
+			response.sendRedirect("redirection.jsp");
+		}
+		else if(filetype.equals("photo"))
+		{
+			session.setAttribute("redirect", "uniqueid");
+			String hostelid=(String)session.getAttribute("hostel_id");
+			System.out.println("--------------------------------------"+hostelid);
+			System.out.println("filepath");
+			Part filepart=request.getPart("file");
+			InputStream fileinputstream=filepart.getInputStream();
+			File filetosave=new File(filepart.getSubmittedFileName());
+			Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			
+			String link = "";
+			
+			String key = "photo/"+hostelid+"/"+ filepart.getSubmittedFileName();
+			  String accesskey = "AKIAZYZ57NNJ2MRI6NUX";
+			 String secretkey = "fj7JA00SWBWeumlnlBWhbIV2yhx7hcG5VE19oOV+";
+			 String bucketname = "rajpatel";
+			 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
+			
+			
+				System.out.println("1) ----file uploading---");
+				PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
+		        request1.setCannedAcl(CannedAccessControlList.PublicRead);
+				s3.putObject(request1);
+				System.out.println("----File uploaded----");
+				System.out.println("\n\n2) ----Get Object---");
+				link = s3.getUrl(bucketname, key).toString();
+				System.out.println("S3 Link: " + link);
+			try 
 			{
-				String doctype=request.getParameter("doctype");
-				String docno=request.getParameter("docno"); 
-				session.setAttribute("redirect", "loadlogin");
-				String hostelid=(String)session.getAttribute("hostel_id");
-				System.out.println("--------------------------------------"+hostelid);
-				System.out.println("filepath");
-				Part filepart=request.getPart("doc");
-				InputStream fileinputstream=filepart.getInputStream();
-				File filetosave=new File(filepart.getSubmittedFileName());
-				Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
-				
-				String link = "";
-				
-				String key = "uniqueid/"+hostelid+"/"+ filepart.getSubmittedFileName();
-				 String accesskey = "AKIASSUNY6Y4XSRJVLKV";
-				 String secretkey = "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";
-				 String bucketname = "enrhostelmanagement";
-				 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
-				
-				
-					System.out.println("1) ----file uploading---");
-					PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
-			        request1.setCannedAcl(CannedAccessControlList.PublicRead);
-					s3.putObject(request1);
-					System.out.println("----File uploaded----");
-					System.out.println("\n\n2) ----Get Object---");
-					link = s3.getUrl(bucketname, key).toString();
-					System.out.println("S3 Link: " + link);
-				try 
-				{
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection c=DriverManager.getConnection("jdbc:mysql://enr-hostel-database.cxi8oq6r3cya.us-east-1.rds.amazonaws.com/enr","admin12345","admin12345");
-					Statement s=c.createStatement();
-					s.executeUpdate("update student_registration set doctype='"+doctype+"',docno='"+docno+"',doclink='"+link+"' where hostelid='"+hostelid+"'");
-					s.close();
-					c.close();
-				} 
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}	
-				response.sendRedirect("redirection.jsp");	
-			}
-			else if(filetype.equals("mess_photo"))
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection c=DriverManager.getConnection("jdbc:mysql://localhost/enr","root","root");
+				Statement s=c.createStatement();
+				s.executeUpdate("update student_registration set image='"+link+"' where hostelid='"+hostelid+"'");
+				s.close();
+				c.close();
+			} 
+			catch (Exception e)
 			{
-				session.setAttribute("redirect", "messpersonphoto");
-				Part filepart=request.getPart("file");
-				InputStream fileinputstream=filepart.getInputStream();
-				File filetosave=new File(filepart.getSubmittedFileName());
-				Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
-				
-				String link = "";
-				
-				String key = "messpersonphoto/"+ filepart.getSubmittedFileName();
-				 String accesskey = "AKIASSUNY6Y4XSRJVLKV";
-				 String secretkey = "RAXGB3TWlX46bRW6gfp+oCgDDm9C0Rmn1Y6L0SJN";
-				 String bucketname = "enrhostelmanagement";
-				 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
-				
-				
-					System.out.println("1) ----file uploading---");
-					PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
-			        request1.setCannedAcl(CannedAccessControlList.PublicRead);
-					s3.putObject(request1);
-					System.out.println("----File uploaded----");
-					System.out.println("\n\n2) ----Get Object---");
-					link = s3.getUrl(bucketname, key).toString();
-					System.out.println("S3 Link: " + link);
-				try 
-				{
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection c=DriverManager.getConnection("jdbc:mysql://enr-hostel-database.cxi8oq6r3cya.us-east-1.rds.amazonaws.com/enr","admin12345","admin12345");
-					Statement s=c.createStatement();
-					s.executeUpdate("update messregistration set image='"+link+"'");
-					s.close();
-					c.close();
-				} 
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}	
-				response.sendRedirect("redirection.jsp");	
-			}
-			else if(filetype.equals("locker"))
+				e.printStackTrace();
+			}	
+			response.sendRedirect("redirection.jsp");	
+		}
+		else if(filetype.equals("uniqueid"))
+		{
+			String doctype=request.getParameter("doctype");
+			String docno=request.getParameter("docno"); 
+			session.setAttribute("redirect", "loadlogin");
+			String hostelid=(String)session.getAttribute("hostel_id");
+			System.out.println("--------------------------------------"+hostelid);
+			System.out.println("filepath");
+			Part filepart=request.getPart("doc");
+			InputStream fileinputstream=filepart.getInputStream();
+			File filetosave=new File(filepart.getSubmittedFileName());
+			Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			
+			String link = "";
+			
+			String key = "uniqueid/"+hostelid+"/"+ filepart.getSubmittedFileName();
+			  String accesskey = "AKIAZYZ57NNJ2MRI6NUX";
+			 String secretkey = "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";
+			 String bucketname = "rajpatel";
+			 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
+			
+			
+				System.out.println("1) ----file uploading---");
+				PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
+		        request1.setCannedAcl(CannedAccessControlList.PublicRead);
+				s3.putObject(request1);
+				System.out.println("----File uploaded----");
+				System.out.println("\n\n2) ----Get Object---");
+				link = s3.getUrl(bucketname, key).toString();
+				System.out.println("S3 Link: " + link);
+			try 
 			{
-				String hostelid=(String)session.getAttribute("hostel_id");
-				String docname=request.getParameter("docname");
-				String description=request.getParameter("description");
-				session.setAttribute("redirect", "locker");
-				Part filepart=request.getPart("doc");
-				InputStream fileinputstream=filepart.getInputStream();
-				File filetosave=new File(filepart.getSubmittedFileName());
-				Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
-				
-				String link = "";
-				
-				String key = "locker/"+ filepart.getSubmittedFileName();
-				 String accesskey = "AKIASSUNY6Y4XSRJVLKV";
-				 String secretkey = "RAXGB3TWlX46bRW6gfp+oCgDDm9C0Rmn1Y6L0SJN";
-				 String bucketname = "enrhostelmanagement";
-				 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
-				
-				
-					System.out.println("1) ----file uploading---");
-					PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
-			        request1.setCannedAcl(CannedAccessControlList.PublicRead);
-					s3.putObject(request1);
-					System.out.println("----File uploaded----");
-					System.out.println("\n\n2) ----Get Object---");
-					link = s3.getUrl(bucketname, key).toString();
-					System.out.println("S3 Link: " + link);
-				try 
-				{
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection c=DriverManager.getConnection("jdbc:mysql://enr-hostel-database.cxi8oq6r3cya.us-east-1.rds.amazonaws.com/enr","admin12345","admin12345");
-					Statement s=c.createStatement();
-					s.executeUpdate("insert into locker (hostelid,docname,description,link) values ('"+hostelid+"','"+docname+"','"+description+"','"+link+"')");
-					s.close();
-					c.close();
-				} 
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}	
-				response.sendRedirect("redirection.jsp");	
-			}else if(filetype.equals("feepayment")){
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection c=DriverManager.getConnection("jdbc:mysql://localhost/enr","root","root");
+				Statement s=c.createStatement();
+				s.executeUpdate("update student_registration set doctype='"+doctype+"',docno='"+docno+"',doclink='"+link+"' where hostelid='"+hostelid+"'");
+				s.close();
+				c.close();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}	
+			response.sendRedirect("redirection.jsp");	
+		}
+		else if(filetype.equals("mess_photo"))
+		{
+			session.setAttribute("redirect", "messpersonphoto");
+			Part filepart=request.getPart("file");
+			InputStream fileinputstream=filepart.getInputStream();
+			File filetosave=new File(filepart.getSubmittedFileName());
+			Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			
+			String link = "";
+			
+			String key = "messpersonphoto/"+ filepart.getSubmittedFileName();
+			 String accesskey = "AKIAZYZ57NNJ2MRI6NUX";
+			 String secretkey = "fj7JA00SWBWeumlnlBWhbIV2yhx7hcG5VE19oOV+";
+			 String bucketname = "rajpatel";
+			 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
+			
+			
+				System.out.println("1) ----file uploading---");
+				PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
+		        request1.setCannedAcl(CannedAccessControlList.PublicRead);
+				s3.putObject(request1);
+				System.out.println("----File uploaded----");
+				System.out.println("\n\n2) ----Get Object---");
+				link = s3.getUrl(bucketname, key).toString();
+				System.out.println("S3 Link: " + link);
+			try 
+			{
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection c=DriverManager.getConnection("jdbc:mysql://localhost/enr","root","root");
+				Statement s=c.createStatement();
+				s.executeUpdate("update messregistration set image='"+link+"'");
+				s.close();
+				c.close();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}	
+			response.sendRedirect("redirection.jsp");	
+		}
+		else if(filetype.equals("locker"))
+		{
+			String hostelid=(String)session.getAttribute("hostel_id");
+			String docname=request.getParameter("docname");
+			String description=request.getParameter("description");
+			session.setAttribute("redirect", "locker");
+			Part filepart=request.getPart("doc");
+			InputStream fileinputstream=filepart.getInputStream();
+			File filetosave=new File(filepart.getSubmittedFileName());
+			Files.copy(fileinputstream,filetosave.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			
+			String link = "";
+			
+			String key = "locker/"+ filepart.getSubmittedFileName();
+			 String accesskey = "AKIAZYZ57NNJ2MRI6NUX";
+			 String secretkey = "fj7JA00SWBWeumlnlBWhbIV2yhx7hcG5VE19oOV+";
+			 String bucketname = "rajpatel";
+			 AmazonS3Client s3 = new AmazonS3Client(new BasicAWSCredentials(accesskey, secretkey));
+			
+			
+				System.out.println("1) ----file uploading---");
+				PutObjectRequest request1 = new PutObjectRequest(bucketname, key, filetosave);
+		        request1.setCannedAcl(CannedAccessControlList.PublicRead);
+				s3.putObject(request1);
+				System.out.println("----File uploaded----");
+				System.out.println("\n\n2) ----Get Object---");
+				link = s3.getUrl(bucketname, key).toString();
+				System.out.println("S3 Link: " + link);
+			try 
+			{
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection c=DriverManager.getConnection("jdbc:mysql://localhost/enr","root","root");
+				Statement s=c.createStatement();
+				s.executeUpdate("insert into locker (hostelid,docname,description,link) values ('"+hostelid+"','"+docname+"','"+description+"','"+link+"')");
+				s.close();
+				c.close();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}	
+			response.sendRedirect("redirection.jsp");	
+		}else if(filetype.equals("feepayment") || filetype.equals("foodpayment")){
 				String CardNumber=request.getParameter("cardnumber");
 		        String mon=request.getParameter("expmonth");
 		        String year=request.getParameter("expyear");
 		        String CVC=request.getParameter("cvc");
 		        String amount=request.getParameter("amount");
-		        session.setAttribute("redirect", "feepayment");
-		        System.out.println("cardnumber = "+CardNumber);
-		        System.out.println("mon = "+mon);
-		        System.out.println("year = "+year);
-		        System.out.println("amount = "+amount);
-		        System.out.println("CVC = "+CVC);
+		        
 		        try {
+		        	
 		        	String currentyear =String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 		        	String hostelid=(String)session.getAttribute("hostel_id");
 					generatetoken(CardNumber,mon,year,CVC,amount);
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection c=DriverManager.getConnection("jdbc:mysql://localhost/enr","root","root");
 					Statement s=c.createStatement();
-					s.executeUpdate("insert into fee_receipt (currentyear,hostelid,status) values ('"+currentyear+"','"+hostelid+"','approved')");
-					s.close();
-					c.close();
-					session.setAttribute("redirect", "feepaymentsuccess");
+					if(filetype.equals("feepayment")){
+						session.setAttribute("redirect", "feepayment");
+						s.executeUpdate("insert into fee_receipt (currentyear,hostelid,status) values ('"+currentyear+"','"+hostelid+"','approved')");
+						s.close();
+						c.close();
+						session.setAttribute("redirect", "feepaymentsuccess");
+					}else if(filetype.equals("foodpayment")){
+						LocalDate date = LocalDate.now();
+						String today=date.toString();
+						String lunchprice=request.getParameter("lunchprice");
+				        String dinnerprice=request.getParameter("dinnerprice");
+				        String lunchmenu=request.getParameter("lunchmenu");
+				        String dinnermenu=request.getParameter("dinnermenu");
+				        String nooffoodcoupon=request.getParameter("nooffoodcoupon");
+				        String foodtime=request.getParameter("foodtime");
+				        int number=Integer.parseInt(nooffoodcoupon);
+				        
+				        
+						s.executeUpdate("insert into food_coupon (date,foodtime,hostelid,nooffoodcoupon,status,cost) values ('"+today+"','"+foodtime+"','"+hostelid+"','"+number+"','approved','"+amount+"')");
+						ResultSet r= s.executeQuery("select dinner,lunch,id from coupon_count where date ='"+today+"'");
+						int lunchcount = 0,dinnercount = 0,id=0;
+						while(r.next()){
+							lunchcount=r.getInt("lunch");
+							dinnercount=r.getInt("dinner");
+							id=r.getInt("id");
+						}
+						s.close();
+						Statement s1=c.createStatement();
+							if(foodtime.equals("lunch")){
+								System.out.print("foodtime = "+foodtime);
+								lunchcount=lunchcount+Integer.parseInt(nooffoodcoupon);
+								s1.executeUpdate("update coupon_count set lunch='"+lunchcount+"' where id='"+id+"'");
+								System.out.print("lunchcount = "+lunchcount);
+							}else if (foodtime.equals("dinner")){
+								System.out.print("foodtime = "+foodtime);
+								dinnercount=dinnercount+Integer.parseInt(nooffoodcoupon);
+								s1.executeUpdate("update coupon_count set dinner='"+dinnercount+"' where id='"+id+"'");
+								System.out.print("dinnercount = "+dinnercount);
+								
+							}else if(foodtime.equals("both")){
+								System.out.print("foodtime = "+foodtime);
+								lunchcount=lunchcount+Integer.parseInt(nooffoodcoupon);
+								dinnercount=dinnercount+Integer.parseInt(nooffoodcoupon);
+								s1.executeUpdate("update coupon_count set dinner='"+dinnercount+"' , lunch='"+lunchcount+"' where id='"+id+"'");
+								System.out.print("lunchcount = "+lunchcount);
+								System.out.print("dinnercount = "+dinnercount);
+								System.out.print("id = "+id);
+							}
+						
+						s1.close();
+						c.close();
+						session.setAttribute("redirect", "foodpaymentsuccess");
+					}
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					session.setAttribute("redirect", "feepaymentfailed");
+					session.setAttribute("redirect", "foodpaymentfailed");
 				}
 		        response.sendRedirect("redirection.jsp");
 			}

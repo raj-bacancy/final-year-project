@@ -214,6 +214,42 @@ public class studentcontroller {
 	        return new ModelAndView("student/food_coupon_apply", "food_coupon", (Object)new food_coupon());
 	    }
 	    
+	    @RequestMapping(value = { "payfoodcoupon.html" }, method = { RequestMethod.GET })
+	    public ModelAndView payfoodcoupon(@ModelAttribute final food_coupon food, final HttpServletRequest request) throws Exception {
+	        
+	        final String s = food.getFoodtime();
+	        final int a = food.getNooffoodcoupon();
+	        final HttpSession session = request.getSession();
+	        int cost;
+	        if (s.equals("lunch")) {
+	            final int lunchprice = (int)session.getAttribute("lunchprice");
+	            System.out.println("lunch price " + lunchprice);
+	            cost = a * lunchprice;
+	        }
+	        else if (s.equals("dinner")) {
+	            final int dinnerprice = (int)session.getAttribute("dinnerprice");
+	            cost = a * dinnerprice;
+	        }
+	        else {
+	            final int lunchprice = (int)session.getAttribute("lunchprice");
+	            final int dinnerprice2 = (int)session.getAttribute("dinnerprice");
+	            final int total = lunchprice + dinnerprice2;
+	            cost = total * a;
+	        }
+	        LocalDate dates = LocalDate.now();
+	         String date = dates.toString();
+	         List l1 = food_dao.getlunch(date);
+	         List l2 = food_dao.getdinner(date);
+	        ModelAndView mv=new ModelAndView();
+	        mv.addObject("nooffoodcoupon",a);
+	        mv.addObject("cost",cost);
+	        mv.addObject("foodtime",s);
+	        mv.addObject("lunch",l1);
+	        mv.addObject("dinner",l2);
+	        mv.setViewName("student/payment_foodcoupon");
+	        return mv;
+	    }
+	    
 	    @RequestMapping(value = { "foodapply.html" }, method = { RequestMethod.GET })
 	    public ModelAndView foodapply(@ModelAttribute final food_coupon food, final HttpServletRequest request) throws Exception {
 	        
@@ -222,7 +258,6 @@ public class studentcontroller {
 	        final HttpSession session = request.getSession();
 	        int cost;
 	        if (s.equals("lunch")) {
-	            System.out.println("bhai");
 	            final int lunchprice = (int)session.getAttribute("lunchprice");
 	            System.out.println("lunch price " + lunchprice);
 	            cost = a * lunchprice;

@@ -143,8 +143,8 @@ public class food_dao
    public  List collect_student_data(int start) {
        Session session = sessionfactory.openSession();
        Query q = session.createQuery("from student_reg");
-       q.setFirstResult(start);
-       q.setMaxResults(10);
+       //q.setFirstResult(start);
+       //q.setMaxResults(10);
        List l =q.list();
        session.close();
       return l;

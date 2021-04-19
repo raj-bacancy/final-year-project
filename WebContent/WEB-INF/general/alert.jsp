@@ -14,6 +14,7 @@ String message=(String)session.getAttribute("alert");
 System.out.println("Alert Message "+message);
 if(message.equals("logincheck"))
 {
+	//out.println("<div class='alert alert-danger alert-dismissible'><a href=''#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>'Invalid data.. Pl try Again'</div>");
 	out.println("alert('Invalid data.. Pl try Again');");
 	out.println("location='loginalert.html';");
 }
@@ -51,7 +52,6 @@ else if(message.equals("room is not there"))
 }
 else if(message.equals("room full"))
 {
-	System.out.println("-------");
 	out.println("alert('Not Enough Vacancy In This Room');");
 	out.println("location='loadgeneratehostelid.html';");
 }

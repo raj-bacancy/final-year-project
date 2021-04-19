@@ -43,8 +43,8 @@ public class fee_receipt_dao {
 		String s="pending";
 		Session session=sessionfactory.openSession();
 		Query q=session.createQuery("from fee_receipt where status='"+s+"'");
-		q.setFirstResult(start);
-		q.setMaxResults(5);
+		//q.setFirstResult(start);
+		//q.setMaxResults(5);
 		List l=q.list();
 		session.close();
 		return l;

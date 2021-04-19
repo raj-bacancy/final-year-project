@@ -428,11 +428,43 @@ public class ownercontroller {
 	}
 	
 	@RequestMapping(value="approveleave.html",method=RequestMethod.GET)
-	public ModelAndView approveleave(@ModelAttribute leave_application leave_application,@RequestParam int id) 
+	public ModelAndView approveleave(@ModelAttribute leave_application leave_application,@RequestParam int id,HttpServletRequest request) 
 	{
 		leave_application.setId(id);
 		leave_application.setStatus("approved");
 		leave_application_dao.updatestatus(leave_application);
+		
+		leave_application leaveapplication=leave_application_dao.getleaveapplication(id);
+		List student=student_dashboard.getstudent(leaveapplication.getHostelid());
+		System.out.println("HostelID = "+student.get(0));
+		student_reg ob=(student_reg)student.get(0);
+		Properties props = new Properties();    
+        props.put("mail.smtp.host", "smtp.gmail.com");    
+        props.put("mail.smtp.socketFactory.port", "465");    
+        props.put("mail.smtp.socketFactory.class",    
+                  "javax.net.ssl.SSLSocketFactory");    
+        props.put("mail.smtp.auth", "true");    
+        props.put("mail.smtp.port", "465");    
+        //get Session   
+        Session session = Session.getDefaultInstance(props,    
+         new javax.mail.Authenticator() {    
+         protected PasswordAuthentication getPasswordAuthentication() {    
+         return new PasswordAuthentication("rgp7714@gmail.com","raj@1234");  
+         }    
+        });    
+        //compose message    
+        try {    
+        		
+		         MimeMessage message = new MimeMessage(session);    
+		         message.addRecipient(Message.RecipientType.TO,new InternetAddress(ob.getFatheremailid()));    
+		         message.setSubject("Leave Application");    
+		         message.setText(leaveapplication.getReason());    
+		         //send message  
+		         Transport.send(message);    
+		         System.out.println("message sent successfully to "+ob.getFatheremailid()); 
+        	
+        } catch (Exception e) {System.out.println("ERROR!!!");}
+        
 		return new ModelAndView("redirect:leaverequestowner.html?start=0");
 	}
 	
@@ -779,7 +811,7 @@ public class ownercontroller {
 			         Transport.send(message);    
 			         System.out.println("message sent successfully to "+l.get(i)); 
 	        	}
-	        } catch (MessagingException e) {throw new RuntimeException(e);}
+	        } catch (MessagingException e) {System.out.println("ERROR!!!");}
 	        
 	        return new ModelAndView("owner/message");
 	    }

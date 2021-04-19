@@ -5,14 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Students Information</title>
+<link href="style.css" rel="stylesheet">
 </head>
 <body>
 <%@taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<jsp:include page="header.jsp"></jsp:include>  
-<jsp:include page="menu.jsp"></jsp:include>
+<%-- <jsp:include page="header.jsp"></jsp:include>  
+<jsp:include page="menu.jsp"></jsp:include> --%>
+<jsp:include page="new_menu_header.jsp"></jsp:include>
 <div class="container">
-	<div class="row mt-5" style="margin-left: 20%">
+	<div class="row mt-5 bottom_space">
 	<c:forEach items="${list}" var="l">
 		<div class="col-lg-6 col-md-6 col-12 mb-3" style="border:0px solid black">
 				 <div class="card" style="width:auto;border:2px solid orange;border-radius: 5%;background-color:#FBF3F2 ">

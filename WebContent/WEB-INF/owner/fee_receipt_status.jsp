@@ -22,12 +22,12 @@
 	   			<hr>
 		   				<div class="row">
 						    <div class="col-sm-12 col-12">
-                                <table class="table table-stripped table-hover table-bordered table-responsive-sm">
+                                <table id="table_id" class="table table-stripped table-hover table-bordered table-responsive-sm">
                                     <thead class="thead-dark">
                                     <tr>
                                     <th><b>No.</b></th>
                                     <th><b>Currentyear</b></th>
-                                    <th><b>Fee Receipt</b></th>
+                                    <!-- <th><b>Fee Receipt</b></th> -->
                                     <th><b>Status</b></th>
                                     </tr>
                                     <tbody>
@@ -36,7 +36,7 @@
 			<tr class="table">	
 		   	<td><b><%=++no%></b></td>
 			<td><b>${i.currentyear }</b></td>
-		 	<td><b><a style="color:#007bff" href="${i.feereceipt}">view</a></b></td>
+		 	<%-- <td><b><a style="color:#007bff" href="${i.feereceipt}">view</a></b></td> --%>
 			<td><b>${i.status}</b></td>
 			</tr>
 			</c:forEach> 	

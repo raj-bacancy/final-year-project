@@ -57,8 +57,8 @@ public class food_coupon_dao {
 		String status="pending";
 		Session session=sessionfactory.openSession();
 		Query q=session.createQuery("from food_coupon where status='"+status+"'");
-		q.setFirstResult(start);
-		q.setMaxResults(5);
+		//q.setFirstResult(start);
+		//q.setMaxResults(5);
 		List<food_coupon> l=q.list();
 		session.close();
 		return l;
@@ -78,7 +78,7 @@ public class food_coupon_dao {
 		String s1=f.format(new Date());
 		
 		Session session=sessionfactory.openSession();
-		Query q=session.createQuery("from coupon_count where date<='"+s1+"'");
+		Query q=session.createQuery("from coupon_count where date<='"+s1+"' order by date desc");
 		q.setMaxResults(7);
 		List<coupon_count> l=q.list();
 		session.close();

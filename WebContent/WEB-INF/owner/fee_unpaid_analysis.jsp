@@ -28,13 +28,13 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 	   			<hr>
 		   				<div class="row">
 						    <div class="col-sm-12 col-12">
-                                <table class="table table-stripped table-hover table-bordered table-responsive-sm">
+                                <table id="table_id" class="table table-stripped table-hover table-bordered table-responsive-sm">
                                     <thead class="thead-dark">
                                     <tr>
                                     <th><b>No.</b></th>
 									<th><b>Hostel Id</b></th>
 									<th><b>Year</b></th>
-									<th><b>Fee Receipt</b></th>
+									<!-- <th><b>Fee Receipt</b></th> -->
                                     </tr>
                                     <tbody>
                                               
@@ -43,13 +43,13 @@ int year = Calendar.getInstance().get(Calendar.YEAR);
 		   	<td><b><%=++a %></b></td>
 			<td><b><a href="viewprofile.html?hostelid=${i}">${i}</a></b></td>
 			<td><b><%=year%></b></td>
-			<td><b><a style="color:blue" href="viewprofile.html?hostelid=${i}">View</a></b></td>
+			<%-- <td><b><a style="color:blue" href="viewprofile.html?hostelid=${i}">View</a></b></td> --%>
 			</tr>
 			</c:forEach>  	
            
                                     </tbody>
 							</table>
-							<a href="getfeegraph.html" class="ml-5"><b>Get Graph</b></a>
+							<a href="getfeegraph.html" class="ml-5"><b><button class="btn btn-danger">Get Graphical Representation</button></b></a>
 						</div>
                 </div>
             </div> 

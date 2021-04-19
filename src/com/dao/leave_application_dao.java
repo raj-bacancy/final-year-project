@@ -43,8 +43,8 @@ public class leave_application_dao {
 		System.out.println("Featch All Data");
 		Session session=sessionfactory.openSession();
 		Query q=session.createQuery("from leave_application where status='"+status+"'");
-		q.setFirstResult(start);
-		q.setMaxResults(5);
+		//q.setFirstResult(start);
+		//q.setMaxResults(5);
 		List l=q.list();
 		session.close();
 		return l;	
@@ -69,6 +69,14 @@ public class leave_application_dao {
 		List l=q.list();
 		session.close();
 		return l;	
+	}
+	
+	public leave_application getleaveapplication(int id) {
+		Session session=sessionfactory.openSession();
+		Query q=session.createQuery("from leave_application where id='"+id+"'");
+		List l=q.list();
+		session.close();
+		return (leave_application) l.get(0);	
 	}
 
 	public int getnoofrequests() {
