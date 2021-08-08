@@ -418,31 +418,35 @@ public class filepath extends HttpServlet {
 				        
 				        
 						s.executeUpdate("insert into food_coupon (date,foodtime,hostelid,nooffoodcoupon,status,cost) values ('"+today+"','"+foodtime+"','"+hostelid+"','"+number+"','approved','"+amount+"')");
-						ResultSet r= s.executeQuery("select dinner,lunch,id from coupon_count where date ='"+today+"'");
-						int lunchcount = 0,dinnercount = 0,id=0;
+						ResultSet r= s.executeQuery("select dinner,lunch,total_count,id from coupon_count where date ='"+today+"'");
+						int lunchcount = 0,dinnercount = 0,id=0,total_count=0;
 						while(r.next()){
 							lunchcount=r.getInt("lunch");
 							dinnercount=r.getInt("dinner");
 							id=r.getInt("id");
 						}
+						total_count =  lunchcount +dinnercount;
 						s.close();
 						Statement s1=c.createStatement();
 							if(foodtime.equals("lunch")){
 								System.out.print("foodtime = "+foodtime);
 								lunchcount=lunchcount+Integer.parseInt(nooffoodcoupon);
-								s1.executeUpdate("update coupon_count set lunch='"+lunchcount+"' where id='"+id+"'");
+								total_count = total_count + Integer.parseInt(nooffoodcoupon);
+								s1.executeUpdate("update coupon_count set lunch='"+lunchcount+"' , total_count='"+total_count+"' where id='"+id+"'");
 								System.out.print("lunchcount = "+lunchcount);
 							}else if (foodtime.equals("dinner")){
 								System.out.print("foodtime = "+foodtime);
 								dinnercount=dinnercount+Integer.parseInt(nooffoodcoupon);
-								s1.executeUpdate("update coupon_count set dinner='"+dinnercount+"' where id='"+id+"'");
+								total_count = total_count + Integer.parseInt(nooffoodcoupon);
+								s1.executeUpdate("update coupon_count set dinner='"+dinnercount+"' , total_count='"+total_count+"' where id='"+id+"'");
 								System.out.print("dinnercount = "+dinnercount);
 								
 							}else if(foodtime.equals("both")){
 								System.out.print("foodtime = "+foodtime);
 								lunchcount=lunchcount+Integer.parseInt(nooffoodcoupon);
 								dinnercount=dinnercount+Integer.parseInt(nooffoodcoupon);
-								s1.executeUpdate("update coupon_count set dinner='"+dinnercount+"' , lunch='"+lunchcount+"' where id='"+id+"'");
+								total_count = total_count + Integer.parseInt(nooffoodcoupon) +Integer.parseInt(nooffoodcoupon);
+								s1.executeUpdate("update coupon_count set dinner='"+dinnercount+"' , lunch='"+lunchcount+"' , total_count='"+total_count+"' where id='"+id+"'");
 								System.out.print("lunchcount = "+lunchcount);
 								System.out.print("dinnercount = "+dinnercount);
 								System.out.print("id = "+id);

@@ -463,7 +463,7 @@ public class ownercontroller {
 		         Transport.send(message);    
 		         System.out.println("message sent successfully to "+ob.getFatheremailid()); 
         	
-        } catch (Exception e) {System.out.println("ERROR!!!");}
+        } catch (Exception e) {System.out.println("ERROR!!!"+e);}
         
 		return new ModelAndView("redirect:leaverequestowner.html?start=0");
 	}
@@ -634,6 +634,23 @@ public class ownercontroller {
 	public ModelAndView loadanalysis()
 	{
 		return new ModelAndView("owner/analysis");
+	}
+	
+	@RequestMapping(value="filter_food_analysis.html",method=RequestMethod.GET)
+	public ModelAndView filter_food_analysis(HttpServletRequest request)
+	{
+		String filter=request.getParameter("filter");
+		System.out.println("Filter Applied = ");
+		List<coupon_count> menu_count = null;
+		if(filter.equals("Last-7-days")){
+			System.out.println("Last-7-days");
+			menu_count=food_coupon_dao.getMenuCount();
+		}else if(filter.equals("Max-7-days")){
+			System.out.println("Last-7-days");
+			menu_count=food_coupon_dao.getMexMenuCount();
+		}
+		System.out.println("menu_count = "+menu_count);
+    	return new ModelAndView("owner/food_coupon_graph","menu_count",menu_count);
 	}
 	
 	@RequestMapping(value="analysis.html",method=RequestMethod.GET)
@@ -811,7 +828,7 @@ public class ownercontroller {
 			         Transport.send(message);    
 			         System.out.println("message sent successfully to "+l.get(i)); 
 	        	}
-	        } catch (MessagingException e) {System.out.println("ERROR!!!");}
+	        } catch (MessagingException e) {System.out.println("ERROR!!!"+e);}
 	        
 	        return new ModelAndView("owner/message");
 	    }

@@ -13,10 +13,28 @@
 <%-- <jsp:include page="header.jsp"></jsp:include>  
 <jsp:include page="menu.jsp"></jsp:include> --%>
 <jsp:include page="new_menu_header.jsp"></jsp:include>
+
 <div style="border:2px solid orange;border-radius:5%" class="row bg-white mx-auto p-5">
-	<div id="chart_div" class="mt-2 col"></div>
-	<div class="col">
-		<h2 class="pt-4 text-center "><b>Menu</b></h2>
+	<div class="col-12">
+		<form action="filter_food_analysis.html">
+							  <div class="row pl-5">
+							    <div class="col">
+							      <select name="filter" style="height:150%; width: 60%">
+							      	<option value="Last-7-days">Last 7 days</option>
+							      	<option value="Max-7-days">Max 7 days</option>
+							      </select>
+							    </div>
+							  </div>
+							  <div class="row pl-5 pb-5">
+							    <div class="col pt-3">
+							  		<button class="btn btn-primary mt-3">Filter Data</button>
+							    </div>
+							  </div>	  
+						</form>
+	</div>
+	<div id="chart_div" class="col-6"></div>
+	<div class="col-6">
+		<h2 class=" text-center "><b>Menu</b></h2>
 	   			<hr>
 		   			<table class="table table-stripped table-hover table-bordered">
 		   	<tr class="table-danger">		

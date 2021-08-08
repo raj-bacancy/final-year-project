@@ -109,6 +109,7 @@ public class food_dao
     }
     public void setlunchcoupon(String date,int a) {
     	System.out.println("Update Status");
+    	int total_count = get_total_count(date);
         Session session = this.sessionfactory.openSession();
         Transaction transaction = session.beginTransaction();   
         Query q = session.createQuery("update coupon_count set lunch='"+a+"' where date ='" + date + "'");
@@ -117,7 +118,17 @@ public class food_dao
         transaction.commit();
         session.close();
     }
-    public  List getdinnercoupon( String date) {
+    public int get_total_count(String date) {
+        Session session = this.sessionfactory.openSession();
+        Transaction transaction = session.beginTransaction();   
+        Query q = session.createQuery("total_count from coupon_count where  date='" + date + "'");
+        List<Integer> l = q.list();
+        System.out.println("getting total Count = "+l);
+        transaction.commit();
+        session.close();
+		return 0;
+	}
+	public  List getdinnercoupon( String date) {
         Session session = sessionfactory.openSession();
         Query q = session.createQuery("from coupon_count where  date='" + date + "'");
         List<complain> l = (List<complain>)q.list();

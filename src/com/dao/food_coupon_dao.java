@@ -84,6 +84,18 @@ public class food_coupon_dao {
 		session.close();
 		return l;
 	}
+	
+	public List<coupon_count> getMexMenuCount() {
+		 SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		String s1=f.format(new Date());
+		
+		Session session=sessionfactory.openSession();
+		Query q=session.createQuery("from coupon_count where date<='"+s1+"' order by total_count desc");
+		q.setMaxResults(7);
+		List<coupon_count> l=q.list();
+		session.close();
+		return l;
+	}
 
 
 }

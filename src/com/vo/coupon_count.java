@@ -25,8 +25,23 @@ public class coupon_count {
 
 	 	@Column(name="dinner")
 	 	int dinner;
+	 	
+	 	@Column(name="total_count", columnDefinition = "int default 0")
+	 	int total_count;
 
-	 	@Column(name="lunchmenu")
+
+
+		public int getTotal_count() {
+			return total_count;
+		}
+
+
+		public void setTotal_count(int total_count) {
+			this.total_count = total_count;
+		}
+
+
+		@Column(name="lunchmenu")
 	 	String lunchmenu;
 
 	 	@Column(name="dinnermenu")
