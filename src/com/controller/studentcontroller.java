@@ -435,13 +435,21 @@ public class studentcontroller {
         String date=complain.getDate();
         String hostelid=complain.getHostelid();
         String subject = complain.getSubject();
+        String description = complain.getComplain();
+        String type = complain.getType();
         List l=complain_dao.checkvalidcomplain(hostelid,date);
         if(l.isEmpty())
         {
-        	System.out.println("===================================================== complainapply");
-        this.complain_dao.send_message(subject);	
-        this.complain_dao.complainapply(complain);
-        return new ModelAndView("student/complain");
+        	try{
+        		worker_vo ob = this.complain_dao.send_message(subject,description);
+            	complain.setAssignee(ob.getName()+"-"+ob.getPhoneno());
+    	        this.complain_dao.complainapply(complain);
+        		
+        	}catch(Exception e){
+        		System.out.println("ERROR!!! "+e.getMessage());
+        	}
+        	
+	        return new ModelAndView("student/complain");
         }
         else
         {

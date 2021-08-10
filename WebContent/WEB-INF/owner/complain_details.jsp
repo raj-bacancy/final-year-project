@@ -31,6 +31,8 @@
                                     <th><b>No.</b></th>
 									<th><b>Hostel_id</b></th>
 									<th><b>Complain Subject</b></th>
+									<th><b>Assignee</b></th>
+									<th><b>Type</b></th>
 									<th><b>Complain </b></th>
 									<th><b>Date</b></th>
 									<th><b>Reply</b></th>
@@ -42,6 +44,8 @@
 		   	<td><b>${i.id}</b></td>
 			<td><b>${i.hostelid }</b></td>
 			<td><b>${i.subject }</b></td>
+			<td><b>${i.assignee }</b></td>
+			<td><b>${i.type }</b></td>
 			<td><b><a href="view.html?id=${i.hostelid}&date=${i.date}">View Complain</a></b></td>
 			<td><b>${i.date}</b></td>
 			<td><center><b><a href="reply.html?id=${i.hostelid}&date=${i.date}"><button class="btn btn-success">Reply</button></a></b></center></td>

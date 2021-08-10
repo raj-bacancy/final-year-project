@@ -29,8 +29,28 @@ public class complain
     String date;
     @Column(name = "status")
     String Status;
+    @Column(name = "assignee")
+    String assignee;
+    @Column(name = "type")
+    String type;
     
-    public String getStatus() {
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
+	}
+
+	public String getStatus() {
         return this.Status;
     }
     

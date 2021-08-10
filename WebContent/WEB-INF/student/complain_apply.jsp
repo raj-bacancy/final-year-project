@@ -30,11 +30,11 @@
 		   		<div class="row">
 		   			<div class="col-12 col-sm-3 "><h3 class="pl-4"> <label>Complain Type : </label><br></h3></div>
 		   			<div class="col-10 col-sm-5 mb-5 set_input_box" id="complain_type">
-						<select class="form-control" placeholder=" Select Complain Type" onchange="show_dropdown()" id="problem_type">
+						<f:select path="type" class="form-control" placeholder=" Select Complain Type" onchange="show_dropdown()" id="problem_type">
 						<option selected disabled hidden>---Choose complain type---</option>
 						<option value="General Problem">General Problem</option>
 						<option value="Personal Problem">Personal Problem</option>
-					    </select>
+					    </f:select>
 			       </div>
 		   		</div>
 		   		<div class="row" id="subject_general_problem" style="display:none">
@@ -56,10 +56,10 @@
 						<f:select path="subject" class="form-control" placeholder=" Subject for Complain">
 						<option selected disabled hidden>---Choose an option---</option>
 						<option value="Plumber">Plumbing</option>
-						<option value="Water Problem">Water Problem</option>
-						<option value="Food Problem">Food Problem</option>
-						<option value="Cleanliness Problem">Cleanliness Problem</option>
-						<option value="Cleanliness Problem">Room Problem</option>
+						<option value="water">Water Problem</option>
+						<option value="Shef">Food Problem</option>
+						<option value="cleaner">Cleanliness Problem</option>
+						<option value="room management">Room Problem</option>
 						<option value="other">Other</option>
 					    </f:select>
 			       </div>
