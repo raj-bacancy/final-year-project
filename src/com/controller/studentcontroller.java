@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -433,9 +434,12 @@ public class studentcontroller {
         
         String date=complain.getDate();
         String hostelid=complain.getHostelid();
+        String subject = complain.getSubject();
         List l=complain_dao.checkvalidcomplain(hostelid,date);
         if(l.isEmpty())
         {
+        	System.out.println("===================================================== complainapply");
+        this.complain_dao.send_message(subject);	
         this.complain_dao.complainapply(complain);
         return new ModelAndView("student/complain");
         }

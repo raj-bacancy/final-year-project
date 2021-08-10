@@ -47,6 +47,7 @@
 				<value>com.vo.locker_vo</value>
 				<value>com.vo.visitor</value>
 				<value>com.vo.attendance_vo</value>
+				<value>com.vo.worker_vo</value>
 			</list>
 		</property>
 		
