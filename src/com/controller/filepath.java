@@ -404,7 +404,22 @@ public class filepath extends HttpServlet {
 					Statement s=c.createStatement();
 					if(filetype.equals("feepayment")){
 						session.setAttribute("redirect", "feepayment");
-						s.executeUpdate("insert into fee_receipt (currentyear,hostelid,status) values ('"+currentyear+"','"+hostelid+"','approved')");
+						
+						//s.executeUpdate("insert into fee_receipt (currentyear,hostelid,status) values ('"+currentyear+"','"+hostelid+"','approved')");
+						
+						//generate pdf for fee payment
+						ResultSet r =s.executeQuery("select * from student_registration where hostelid='"+hostelid+"'");
+						String firstname ="";
+						String emailId ="";
+						String mobileNo="";
+						while(r.next()) {
+						firstname =r.getString("firstname");
+						emailId = r.getString("email");
+						mobileNo = r.getString("phoneno");
+						}
+						PdfConvertorFees feesPdf = new PdfConvertorFees();
+						String link = feesPdf.PdfCretor(hostelid, firstname, mobileNo, emailId, amount);
+						s.executeUpdate("insert into fee_receipt (currentyear,hostelid,status,link) values ('"+currentyear+"','"+hostelid+"','approved','"+link+"')");
 						s.close();
 						c.close();
 						session.setAttribute("redirect", "feepaymentsuccess");

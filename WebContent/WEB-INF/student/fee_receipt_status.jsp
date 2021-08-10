@@ -38,7 +38,7 @@
 		   	<td><b><%=++no%></b></td>
 		
 			<td><b>${i.currentyear }</b></td>
-		 	<td><b><a style="color:blue" href="${i.feereceipt}">view</a></b></td>
+		 	<td><b><a style="color:blue" href="${i.link}" target="_blank" download>view</a></b></td>
 			<td><b>${i.status}</b></td>
 			</tr>
 			</c:forEach> 	
