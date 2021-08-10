@@ -637,18 +637,44 @@ public class ownercontroller {
 	}
 	
 	@RequestMapping(value="filter_food_analysis.html",method=RequestMethod.GET)
-	public ModelAndView filter_food_analysis(HttpServletRequest request)
+	public ModelAndView filter_food_analysis_by_dropdown(HttpServletRequest request)
 	{
-		String filter=request.getParameter("filter");
-		System.out.println("Filter Applied = ");
+		
+		
+		
 		List<coupon_count> menu_count = null;
-		if(filter.equals("Last-7-days")){
-			System.out.println("Last-7-days");
-			menu_count=food_coupon_dao.getMenuCount();
-		}else if(filter.equals("Max-7-days")){
-			System.out.println("Last-7-days");
-			menu_count=food_coupon_dao.getMexMenuCount();
-		}
+		
+			String filter=request.getParameter("filter");
+			System.out.println("Filter Applied = ");
+			if(filter.equals("Last-7-days")){
+				System.out.println("Last-7-days");
+				menu_count=food_coupon_dao.getMenuCount();
+			}else if(filter.equals("Max-7-days")){
+				System.out.println("Last-7-days");
+				menu_count=food_coupon_dao.getMexMenuCount();
+			}else if(filter.equals("Min-7-days")){
+				System.out.println("Min-7-days");
+				menu_count=food_coupon_dao.getMinMenuCount();
+			}else if(filter.equals("Last-Month")){
+				System.out.println("Last-Month");
+				menu_count=food_coupon_dao.getLastMonthMenuCount();
+			}
+			System.out.println("menu_count = "+menu_count);
+			return new ModelAndView("owner/food_coupon_graph","menu_count",menu_count);
+	    	
+		
+		
+		
+	}
+	
+	@RequestMapping(value="filter_food_analysis_by_date.html",method=RequestMethod.GET)
+	public ModelAndView filter_food_analysis_by_date(HttpServletRequest request)
+	{
+		System.out.println("filter_food_analysis_by_date========================================================");
+		String date_from=request.getParameter("date_form");
+		String date_to = request.getParameter("date_to");
+		List<coupon_count> menu_count = null;
+		menu_count=food_coupon_dao.getfilterdateMenuCount(date_from,date_to);
 		System.out.println("menu_count = "+menu_count);
     	return new ModelAndView("owner/food_coupon_graph","menu_count",menu_count);
 	}

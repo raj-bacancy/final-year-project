@@ -17,6 +17,7 @@
 	String hostelid=(String)session.getAttribute("hostel_id");
 %>
 <body>
+<!--<jsp:include page="new_menu_header.jsp"></jsp:include>-->
 <center><h2 class="mt-5">Pay for Food Coupon</h2></center>
 <hr>
 	<div class="container">

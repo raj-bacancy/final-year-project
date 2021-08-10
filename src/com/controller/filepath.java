@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,6 +39,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 
+
 /**
  * Servlet implementation class filepath
  */
@@ -56,7 +58,8 @@ public class filepath extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
 	}
@@ -415,7 +418,7 @@ public class filepath extends HttpServlet {
 				        String nooffoodcoupon=request.getParameter("nooffoodcoupon");
 				        String foodtime=request.getParameter("foodtime");
 				        int number=Integer.parseInt(nooffoodcoupon);
-				        
+				       // FoodBill("abc", 123, 50, 20, 5, "abc", "xyz", "xyz");
 				        
 						s.executeUpdate("insert into food_coupon (date,foodtime,hostelid,nooffoodcoupon,status,cost) values ('"+today+"','"+foodtime+"','"+hostelid+"','"+number+"','approved','"+amount+"')");
 						ResultSet r= s.executeQuery("select dinner,lunch,total_count,id from coupon_count where date ='"+today+"'");

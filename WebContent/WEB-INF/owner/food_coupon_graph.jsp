@@ -20,8 +20,11 @@
 							  <div class="row pl-5">
 							    <div class="col">
 							      <select name="filter" style="height:150%; width: 60%">
+							      	<option value="">select filter</option>
 							      	<option value="Last-7-days">Last 7 days</option>
 							      	<option value="Max-7-days">Max 7 days</option>
+							      	<option value="Min-7-days">Min 7 days</option>
+							      	<option value="Last-Month">Last Month</option>
 							      </select>
 							    </div>
 							  </div>

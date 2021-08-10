@@ -246,6 +246,21 @@ public class studentcontroller {
 	        mv.addObject("foodtime",s);
 	        mv.addObject("lunch",l1);
 	        mv.addObject("dinner",l2);
+	        
+	        //make pdf for food coupon
+	        
+	        coupon_count lunchmenu= (coupon_count) l1.get(0);
+	        lunchmenu.getLunchmenu();
+	        coupon_count dinnermenu= (coupon_count) l2.get(0);
+	        dinnermenu.getDinnermenu();
+	        
+	        //MAKE PDF FILE FOR COUPON
+	        String hostelId = (String)session.getAttribute("hostel_id");
+	        List l3 =reg_dao.collect_student_info(hostelId);
+	        student_reg email= (student_reg) l3.get(0);
+	        pdfConvertor con = new pdfConvertor();
+	        con.PdfCretor(hostelId,lunchmenu.getLunchmenu(),dinnermenu.getDinnermenu(),s,Integer.toString(cost),Integer.toString(a),email.getEmail());
+	        
 	        mv.setViewName("student/payment_foodcoupon");
 	        return mv;
 	    }
