@@ -103,6 +103,22 @@
 							    </div>
 							  </div>
 						  </div><br/>
+						  
+						  <!-- section6 -->
+						  <div class="col-sm-12 col-12 text-center">
+							  <h5><u>About Visitor in Hostel</u></h5>
+						  </div>
+						  
+						  <div class="col-sm-12 col-12">
+						  	<div class="row">
+						  		<div class="col-sm-4 col-12">
+							    	<b>General Visitor = 5</b>
+							    </div>
+							    <div class="col-sm-4 col-12">
+							    	<b>Technition  = 6</b>
+							    </div>
+							  </div>
+						  </div><br/>
 						 
 						  
 						  

@@ -31,9 +31,21 @@
 		   			
 		   		</div>
 		   		
+		   		
 		   		<div class="row">
 		   			<div class="col-12 col-sm-4 "><h3 class="pl-4">Visitor Name: </h3></div>
 		   			<div class="col-10 col-sm-5 mb-5 set_input_box"><f:input type="text"  class="form-control"  required="required"  path="visitorname"/></div>
+		   			
+		   		</div>
+		   		<div class="row">
+		   			<div class="col-12 col-sm-4 "><h3 class="pl-4">Visitor Type: </h3></div>
+		   			<div class="col-10 col-sm-5 mb-5 set_input_box">
+		   				<select class="form-control">
+						      	<option selected disabled hidden>---Choose an option---</option>
+						      	<option value="general">General Visitor</option>
+						      	<option value="ac">Technician</option>
+						      </select>
+		   			</div>
 		   			
 		   		</div>
 		   		
