@@ -21,4 +21,12 @@ public class locker_dao {
         session.close();
         return l;
     }
+	
+	public List getmydoc(String hostelid) {
+        Session session = this.sessionfactory.openSession();
+        Query q = session.createQuery("from fee_receipt where hostelid='"+hostelid+"'");
+        List l = q.list();
+        session.close();
+        return l;
+    }
 }

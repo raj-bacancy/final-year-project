@@ -63,6 +63,27 @@
 							  </div>
 						  </div><br/><br/>
 						  
+						  <!-- section4 -->
+						<div class="col-sm-12 col-12 text-center">
+						   	<h5><u>About Students Availability</u></h5>
+						</div>
+
+							
+						  <!-- section5 -->
+						  <div class="col-sm-12 col-12">
+						  	<div class="row">
+						  		<div class="col-sm-4 col-12">
+							    	<b>Total no of Students  = ${totalmamber}</b>
+							    </div>
+							    <div class="col-sm-4 col-12">
+							    	<b>No of absent students = ${no_of_present_student}</b>
+							    </div>
+							    <div class="col-sm-4 col-12">
+							    	<b>No of present students = ${no_of_absent_student}</b>
+							    </div>
+							  </div>
+						  </div><br/><br/>
+						  
 						  
 						  <!-- section6 -->
 						  <div class="col-sm-12 col-12 text-center">

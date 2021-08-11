@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.vo.add_room_vo;
+import com.vo.attendance_vo;
 
 @Repository
 public class student_dashboard_dao {
@@ -89,6 +92,24 @@ public class student_dashboard_dao {
 		
 		return capacity;
 		
+	}
+
+	public int get_no_of_absent_student() {
+		SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+    	String s1=f.format(new Date());
+		Session session=sessionfactory.openSession();
+		Query q=session.createQuery("from attendance_vo where today='"+s1+"'");
+		List l=q.list();
+		int no_of_absent_student = 0;
+		System.out.println("List ======== outside "+l.size()+"Date is "+s1);
+		if(l.size()!=0){
+			attendance_vo ob = (attendance_vo) l.get(0);
+			String present_student = ob.getStudents();
+			no_of_absent_student = present_student.split("-").length;
+			System.out.println("List ========"+l.get(0));
+		}
+		session.close();
+		return no_of_absent_student;
 	}
 
 }

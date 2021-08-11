@@ -70,17 +70,24 @@
                         <div class="col-sm-12 col-12">
                             <div class="row">
 
-                                 <div class="col-sm-6 col-12 text-center">
+                                 <div class="col-sm-4 col-12 text-center">
                                     <form action="addlocker.html" method="get">
                                     <button type="submit" class="btn btn-primary">Add in Locker</button>
                                     </form>
                                 </div>
 
-                                <div class="col-sm-6 col-12 text-center pt-1">
+                                <div class="col-sm-4 col-12 text-center pt-1">
                                     <form action="showlocker.html" method="get">
                                     <button type="submit" class="btn btn-primary">Show Locker</button>
                                 </form>
                                 </div>
+                                
+                                <div class="col-sm-4 col-12 text-center pt-1">
+                                    <form action="mydocuments.html" method="get">
+                                    <button type="submit" class="btn btn-primary">My Document</button>
+                                </form>
+                                </div>
+                                
 						      </div>
                         </div>
 

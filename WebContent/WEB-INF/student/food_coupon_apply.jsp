@@ -55,7 +55,7 @@
 		   		<div class="row">
 		   			<div class="col-12 col-sm-12">
 		   			<center>
-		   			<button class="btn btn-info">Bye Food Coupons</button>
+		   			<button class="btn btn-info">Buy Food Coupons</button>
 		   			</center>
 		   			</div>
 		   		</div>

@@ -490,6 +490,14 @@ public class studentcontroller {
         return new ModelAndView("student/show_locker","list",l);
     }
     
+    @RequestMapping(value ="mydocuments.html",method = RequestMethod.GET)
+    public ModelAndView mydocuments(HttpServletRequest request){   
+    	HttpSession session=request.getSession();
+    	String hostelid=(String)session.getAttribute("hostel_id");
+    	List l=locker_dao.getmydoc(hostelid);
+        return new ModelAndView("student/show_my_doc","list",l);
+    }
+    
     @RequestMapping(value = { "visitor.html" }, method = { RequestMethod.GET })
     public ModelAndView visitor() {
         return new ModelAndView("student/visitor_apply","visitors", new visitor());

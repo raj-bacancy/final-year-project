@@ -102,11 +102,42 @@ function check(){
 						      <span id="capacity_error" style="display:none;color:red" >Enter valid capacity</span>
 						    </div>
 						  </div>
-						  <div class="row pl-5 pb-5">
-						    <div class="col">
-						  		<f:button type="submit" onclick="return check()" class="btn btn-primary mt-3">Add Room</f:button>
-						    </div>
-						  </div>	  
+						  <div class="row pl-5">
+							   <div class="col">
+							     <label class="pt-2"><b>Table</b></label>
+							     <input id="table" type="number" class="form-control" style="width:60%" placeholder="Enter Capacity of Room" name="table" />
+							     <span id="capacity_error" style="display:none;color:red" >Enter valid capacity</span>
+							   </div>
+							</div>
+							
+							<div class="row pl-5">
+							   <div class="col">
+							     <label class="pt-2"><b>Fan</b></label>
+							     <input id="table" type="number" class="form-control" style="width:60%" placeholder="Enter Number of fan" name="table" />
+							     <span id="capacity_error" style="display:none;color:red" >Enter Number of fan</span>
+							   </div>
+							</div>
+							<div class="row pl-5">
+							   <div class="col">
+							     <label class="pt-2"><b>Cupboard</b></label>
+							     <input id="table" type="number" class="form-control" style="width:60%" placeholder="Enter Number of cupboard" name="table" />
+							     <span id="capacity_error" style="display:none;color:red" >Enter Number of cupboard</span>
+							   </div>
+							</div>
+							<div class="row pl-5">
+							   <div class="col">
+							     <label class="pt-2"><b>Chair</b></label>
+							     <input id="table" type="number" class="form-control" style="width:60%" placeholder="Enter Number of chair" name="table" />
+							     <span id="capacity_error" style="display:none;color:red" >Enter Number of chair</span>
+							   </div>
+							</div>
+							 <div class="row pl-5 pb-5">
+							   <div class="col">
+							  <f:button type="submit" onclick="return check()" class="btn btn-primary mt-3">Add Room</f:button>
+							   </div>
+							 </div> 
+						  
+						    
 					</f:form>
 	   		</div>
 </body>

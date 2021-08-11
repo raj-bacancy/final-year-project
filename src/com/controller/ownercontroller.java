@@ -256,6 +256,10 @@ public class ownercontroller {
 		int no_of_room=student_dashboard.getnoofroom();
 		mv.addObject("noofroom", no_of_room);
 		
+		int no_of_absent_student=student_dashboard.get_no_of_absent_student();
+		mv.addObject("no_of_absent_student", no_of_absent_student);
+		
+		
 		int no_of_student_room=student_dashboard.getnoofstudentroom();
 		mv.addObject("noofstudentroom", no_of_student_room);
 		
@@ -267,6 +271,9 @@ public class ownercontroller {
 		mv.addObject("totalmamber", capacity[1]);
 		mv.addObject("vacancy", capacity[2]);
 		mv.addObject("list", list);
+		
+		int no_of_present_student= capacity[1] - no_of_absent_student;
+		mv.addObject("no_of_present_student", no_of_present_student);
 		
 		mv.setViewName("owner/home");
 		return mv;
